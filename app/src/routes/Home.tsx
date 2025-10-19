@@ -1,39 +1,70 @@
+import { Link } from "react-router";
+
 const TOOLS = [
   {
-    label: "tool 1",
+    label: "JSON Formatter",
+    description: "Quickly turn your JSON into a clean and readable format.",
+    href: "/tool/json-formatter",
   },
   {
     label: "tool 2",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 3",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 1",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 1",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 2",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 3",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 1",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 1",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 2",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 3",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
   {
     label: "tool 1",
+    description: "Coming Soon!",
+    href: "/tool/",
+  },
+  {
+    label: "tool 1",
+    description: "Coming Soon!",
+    href: "/tool/",
   },
 ];
 
@@ -50,9 +81,10 @@ function Home() {
           {TOOLS &&
             TOOLS.map((t) => {
               return (
-                <div key={`${t.label}`} className="card">
-                  {t.label}
-                </div>
+                <Link key={`${t.label}`} to={t.href} className="card">
+                  <h6>{t.label} </h6>
+                  <p>{t.description}</p>
+                </Link>
               );
             })}
         </div>

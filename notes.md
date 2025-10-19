@@ -1,7 +1,7 @@
 ## TODO
 
 - Setup Routing
-  -- Replace header anchor tags with Link tags
+  -- Replace header anchor tags with Link tags (DONE)
 
 - Install react icon package
   -- replace search text with an icon to toggle search input
@@ -10,7 +10,8 @@
   -- filter tools based on search value prop; pass prop to toolList from Home; update using callback prop in Header
 
 - Define constant TOOLS with real labels,descriptions,href,iconLabel
-  -- use undefined href for tools that are not yet complete
+  -- use undefined href for tools that are not yet complete (DONE)
+  -- add a new 'not found' page for 404 handling (DONE)
 
 - Plan tool components
   -- what components can be shared across tools? Otherwise remaining components need to be specialized for a specific tool, so try to plan and make as many re-usable components first.
@@ -28,3 +29,6 @@
   -- Tool 10: Unix Timestamp to Readable time
   -- Tool 11: OKLCH Color Picker
   -- Tool 12: Character Replace- easily replace non UTF-8/Ascii chars from text by selecting a bad value to replace with new good value.
+
+- Add global context for toast messages
+  -- use in components for displaying error/success info.

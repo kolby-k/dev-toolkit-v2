@@ -1,5 +1,6 @@
 import { useState } from "react";
 import appLogo from "../assets/logo.png";
+import { NavLink, Link } from "react-router";
 
 function Header() {
   const [searchHidden, setSearchHidden] = useState<boolean>(true);
@@ -8,12 +9,13 @@ function Header() {
   return (
     <div className="header">
       <div className="logo-container">
-        <a href="/" id="app-logo">
+        <Link to="/" id="app-logo">
           <img src={appLogo} alt="Developer Toolkit Logo" />
-        </a>
+        </Link>
       </div>
       <div className="header-links">
-        <p>Home</p> <p>FAQ</p>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/faq">FAQ</NavLink>
       </div>
       <div className="search-container">
         {!searchHidden && (
