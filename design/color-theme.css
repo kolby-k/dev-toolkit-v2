@@ -1,0 +1,54 @@
+:root {
+  --bg: oklch(0.1482 0.0208 213.4);
+  --bg-secondary: oklch(0.2178 0 0);
+
+  --text-muted: oklch(0.9001 0.0214 215.27);
+  --text: oklch(0.955 0.01 212.52);
+  --text-inverted: oklch(0.1867 0 0);
+  --text-green: oklch(0.9025 0.2053 138.64);
+
+  --accent-yellow: oklch(0.957 0.2142 113.76);
+  --accent-green: oklch(0.8211 0.2142 152.24);
+
+  --primary: oklch(0.6126 0.1601 152.3);
+  --primary-dark: oklch(0.5583 0.1448 152.3);
+
+  --card: oklch(0.937 0 0);
+  --divider: oklch(0.7122 0 0);
+  --border: oklch(0.7952 0 0);
+  --border-secondary: oklch(0.2645 0 0);
+
+  --link: oklch(0.5 0.2 210);
+  --link-two: oklch(0.55 0.2 210);
+  --link-3: oklch(0.45 0.2 210);
+  --accent-red: oklch(0.5 0.2 10);
+
+  --shadow: oklch(0.3 0.1 290);
+}
+
+:root[data-theme="light"] {
+  --bg: oklch(0.965 0.015 220); /* soft off-white with blue hint */
+  --bg-secondary: oklch(
+    0.935 0.01 220
+  ); /* slightly darker for sections/cards */
+
+  --text-muted: oklch(0.36 0.02 220); /* soft neutral gray-blue */
+  --text: oklch(0.22 0.015 220); /* main body text (dark navy-gray) */
+  --text-inverted: oklch(
+    0.96 0 0
+  ); /* used on dark buttons, opposite of dark theme */
+  --text-green: oklch(0.37 0.12 150); /* readable green tone for links/status */
+
+  --accent-yellow: oklch(
+    0.82 0.18 110
+  ); /* warm accent, matches dark mode hue */
+  --accent-green: oklch(0.7 0.18 152); /* medium chroma green accent */
+
+  --primary: oklch(0.52 0.14 152); /* balanced teal-blue primary */
+  --primary-dark: oklch(0.42 0.13 152); /* darker hover/active state */
+
+  --card: oklch(0.98 0.005 220); /* white-ish card bg */
+  --divider: oklch(0.82 0.005 220); /* subtle line */
+  --border: oklch(0.78 0.005 220); /* input/button border */
+  --border-secondary: oklch(0.88 0.005 220); /* subtle container outlines */
+}

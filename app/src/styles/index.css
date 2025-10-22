@@ -1,34 +1,66 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-  --bg: oklch(0.1 0.05 290);
-  --bg-light: oklch(0.25 0.05 290);
-  --bg-dark: oklch(0.05 0.05 290);
+  --bg: oklch(0.1482 0.0208 213.4);
+  --bg-secondary: oklch(0.2178 0 0);
 
-  --text: oklch(0.9 0.05 290);
+  --text: oklch(0.955 0.01 212.52);
+  --text-secondary: oklch(0.9001 0.0214 215.27);
+  --text-muted: oklch(0.8001 0.0214 215.27);
+  --text-inverted: oklch(0.1867 0 0);
+  --text-green: oklch(0.9025 0.2053 138.64);
 
-  --link: oklch(0.5 0.25 290);
-  --link-hover: oklch(0.4 0.25 290);
+  --accent-yellow: oklch(0.957 0.2142 113.76);
+  --accent-green: oklch(0.8211 0.2142 152.24);
 
-  --accent-blue: oklch(0.5 0.2 210);
-  --accent-blue-light: oklch(0.55 0.2 210);
-  --accent-blue-dark: oklch(0.45 0.2 210);
+  --primary: oklch(0.6126 0.1601 152.3);
+  --primary-dark: oklch(0.5583 0.1448 152.3);
+
+  --card: oklch(0.937 0 0);
+  --divider: oklch(0.7122 0 0);
+  --border: oklch(0.5952 0 0);
+  --border-secondary: oklch(0.2645 0 0);
+
+  --link: oklch(0.5 0.2 210);
+  --link-2: oklch(0.55 0.2 210);
+  --link-3: oklch(0.45 0.2 210);
   --accent-red: oklch(0.5 0.2 10);
 
   --shadow: oklch(0.3 0.1 290);
+  --highlight: oklch(0.9152 0 0);
+
   font-size: 14px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg: oklch(0.9 0.05 290);
-    --bg-light: oklch(0.95 0.05 290);
-    --bg-dark: oklch(0.8 0.05 290);
+    --bg: oklch(0.965 0.015 220); /* soft off-white with blue hint */
+    --bg-secondary: oklch(
+      0.935 0.01 220
+    ); /* slightly darker for sections/cards */
 
-    --text: oklch(0.1 0.05 290);
+    --text: oklch(0.22 0.015 220); /* main body text (dark navy-gray) */
+    --text-secondary: oklch(0.3 0.017 220);
+    --text-muted: oklch(0.36 0.02 220); /* soft neutral gray-blue */
+    --text-inverted: oklch(
+      0.96 0 0
+    ); /* used on dark buttons, opposite of dark theme */
+    --text-green: oklch(
+      0.37 0.12 150
+    ); /* readable green tone for links/status */
 
-    --link: oklch(0.7 0.25 290);
-    --link-hover: oklch(0.8 0.25 290);
+    --accent-yellow: oklch(
+      0.82 0.18 110
+    ); /* warm accent, matches dark mode hue */
+    --accent-green: oklch(0.7 0.18 152); /* medium chroma green accent */
+
+    --primary: oklch(0.52 0.14 152); /* balanced teal-blue primary */
+    --primary-dark: oklch(0.42 0.13 152); /* darker hover/active state */
+
+    --card: oklch(0.98 0.005 220); /* white-ish card bg */
+    --divider: oklch(0.82 0.005 220); /* subtle line */
+    --border: oklch(0.78 0.005 220); /* input/button border */
+    --border-secondary: oklch(0.88 0.005 220); /* subtle container outlines */
 
     --shadow: oklch(0.7 0.1 290);
   }
@@ -36,6 +68,7 @@
 
 html {
   height: 100%;
+  max-width: 100dvw;
 }
 
 * {
@@ -45,7 +78,7 @@ html {
 }
 
 body {
-  background: var(--link);
+  background: var(--bg);
   margin: 0;
   min-width: 320px;
   min-height: 100dvh;
@@ -66,10 +99,12 @@ body {
   justify-content: space-between;
 
   min-height: 50dvh;
-  max-width: 1280px;
+  min-width: 300px;
   margin: 0 auto;
 
   overflow: auto;
+
+  color: var(--text);
 
   border: 1px solid white;
 }
@@ -114,25 +149,37 @@ p {
 }
 
 .success-text {
-  color: var(--accent-blue);
+  color: var(--accent-green);
 }
 
 a {
-  color: var(--accent-blue);
-  height: 100%;
+  color: var(--text);
+  cursor: pointer;
 }
 
 a:hover {
-  color: var(--accent-blue-dark);
+  color: var(--text-muted);
 }
 
 a.active {
-  color: var(--accent-blue-light);
+  color: var(--text);
 }
 
-.banner {
-  background: var(--bg);
-  padding: 1rem;
+.blur {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  overflow-y: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.fit-screen {
+  max-height: 100dvh;
+  overflow: hidden;
+  position: fixed;
 }
 
 @media screen (min-width: 1250px) {

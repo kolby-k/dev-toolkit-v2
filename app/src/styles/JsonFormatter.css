@@ -23,7 +23,25 @@
   border: 1px solid orange;
 }
 
+#multiline-input-gutter {
+  min-height: 100%;
+  width: 2rem;
+  position: relative;
+  background-color: var(--bg-light);
+  line-height: 1.1;
+}
+
 #json-formatter-input {
   width: 90vw;
   height: 100%;
+
+  resize: none;
+
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+#gutter-label {
+  font-size: 1rem;
+  color: var(--text);
 }
