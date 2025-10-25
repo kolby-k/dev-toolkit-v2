@@ -16,14 +16,24 @@ function Header() {
       <div className="logo-container">
         <Link to="/">
           <AiFillCode id="app-logo" />
-          <h1 id="app-name">Developer Toolkit</h1>
+          <h1 id="app-name" className="link-text">
+            Developer Toolkit
+          </h1>
         </Link>
       </div>
       <div className="header-links">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/tools?category=frontend">Frontend</NavLink>
-        <NavLink to="/tools?category=backend">Backend</NavLink>
+        <NavLink to="/" className="link-text">
+          Home
+        </NavLink>
+        <NavLink to="/about" className="link-text">
+          About
+        </NavLink>
+        <NavLink to="/tools?category=frontend" className="link-text">
+          Frontend
+        </NavLink>
+        <NavLink to="/tools?category=backend" className="link-text">
+          Backend
+        </NavLink>
       </div>
 
       <CiMenuFries id="header-open-icon" onClick={toggleMiniMenu} />
@@ -31,21 +41,31 @@ function Header() {
       {isMenuVisible && (
         <div className="blur fit-screen">
           <div className="header-menu-mobile">
-            <NavLink to="/" onClick={() => setIsMenuVisible(false)}>
+            <NavLink
+              to="/"
+              onClick={() => setIsMenuVisible(false)}
+              className="link-text"
+            >
               Home
             </NavLink>
-            <NavLink to="/about" onClick={() => setIsMenuVisible(false)}>
+            <NavLink
+              to="/about"
+              onClick={() => setIsMenuVisible(false)}
+              className="link-text"
+            >
               About
             </NavLink>
             <NavLink
               to="/tools?category=frontend"
               onClick={() => setIsMenuVisible(false)}
+              className="link-text"
             >
               Frontend
             </NavLink>
             <NavLink
               to="/tools?category=backend"
               onClick={() => setIsMenuVisible(false)}
+              className="link-text"
             >
               Backend
             </NavLink>

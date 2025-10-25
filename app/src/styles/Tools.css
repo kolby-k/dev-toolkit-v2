@@ -52,3 +52,12 @@
 
   /* border: 1px solid red; */
 }
+
+/* MEDIA QUERIES */
+@media (min-width: 790px) {
+  .tool-list {
+    padding: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+}

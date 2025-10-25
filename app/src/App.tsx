@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router";
-import "./styles/App.css";
 import Home from "./routes/Home";
 import JsonFormatter from "./routes/tools/JsonFormatter";
 import NotFound from "./routes/Not-Found";
 import Tools from "./routes/tools/Tools";
+
+import "./styles/App.css";
 
 function App() {
   return (
