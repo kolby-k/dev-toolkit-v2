@@ -1,12 +1,15 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-  --bg: oklch(0.1482 0.0208 213.4);
+  --bg: oklch(0.1482 0 0);
   --bg-secondary: oklch(0.2178 0 0);
+  --bg-muted: oklch(0.4 0 0);
 
-  --text: oklch(0.955 0.01 212.52);
-  --text-secondary: oklch(0.9001 0.0214 215.27);
-  --text-muted: oklch(0.8001 0.0214 215.27);
+  --downlight: var(--bg-muted);
+
+  --text: oklch(0.955 0 0);
+  --text-secondary: oklch(0.9001 0 0);
+  --text-muted: oklch(0.8001 0 0);
   --text-inverted: oklch(0.1867 0 0);
 
   --accent-orange: oklch(0.8 0.17217 84.496);
@@ -25,11 +28,11 @@
 
   --btn-green: oklch(0.65 0.2 152);
   --btn-green-light: oklch(0.85 0.2 152);
-  --text-green: oklch(0.35 0.25 152);
+  --text-green: oklch(0.15 0.15 152);
 
   --btn-blue: oklch(0.65 0.2 210);
   --btn-blue-light: oklch(0.85 0.2 210);
-  --text-blue: oklch(0.35 0.25 210);
+  --text-blue: oklch(0.15 0.15 210);
 
   --link: oklch(0.5 0.2 210);
   --link-2: oklch(0.55 0.2 210);
@@ -37,20 +40,21 @@
 
   --shadow: oklch(0.3 0.1 270 / 0.3);
   --highlight: oklch(0.9152 0 0);
+  --icon: oklch(0.21 0 0);
 
+  --brighter-filter: 110%;
   font-size: 14px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg: oklch(0.965 0.015 220); /* soft off-white with blue hint */
-    --bg-secondary: oklch(
-      0.935 0.01 220
-    ); /* slightly darker for sections/cards */
+    --bg: oklch(0.965 0 220); /* soft off-white with blue hint */
+    --bg-secondary: oklch(0.9 0 220); /* slightly darker for sections/cards */
+    --bg-muted: oklch(0.85 0 0);
 
-    --text: oklch(0.22 0.015 220); /* main body text (dark navy-gray) */
-    --text-secondary: oklch(0.3 0.017 220);
-    --text-muted: oklch(0.36 0.02 220); /* soft neutral gray-blue */
+    --text: oklch(0.22 0 0); /* main body text (dark navy-gray) */
+    --text-secondary: oklch(0.3 0 0);
+    --text-muted: oklch(0.36 00 0); /* soft neutral gray-blue */
     --text-inverted: oklch(
       0.96 0 0
     ); /* used on dark buttons, opposite of dark theme */
@@ -61,19 +65,24 @@
     --primary-dark: oklch(0.42 0.13 152); /* darker hover/active state */
 
     --card: oklch(0.98 0.005 220); /* white-ish card bg */
-    --divider: oklch(0.82 0.005 220); /* subtle line */
+    --divider: oklch(0.9 0.005 220); /* subtle line */
     --border: oklch(0.78 0.005 220); /* input/button border */
     --border-secondary: oklch(0.88 0.005 220); /* subtle container outlines */
 
-    --btn-green: oklch(0.4 0.1 152);
-    --btn-green-light: oklch(0.75 0.1 152);
-    --text-green: oklch(0.95 0.15 152);
+    --btn-green: oklch(0.5 0.1 152);
+    --btn-green-light: oklch(0.6 0.25 152);
+    --text-green: oklch(1 0.1 152);
 
-    --btn-blue: oklch(0.4 0.1 210);
-    --btn-blue-light: oklch(0.75 0.1 210);
-    --text-blue: oklch(0.95 0.15 210);
+    --btn-blue: oklch(0.5 0.1 210);
+    --btn-blue-light: oklch(0.6 0.25 210);
+    --text-blue: oklch(1 0.1 210);
 
-    --shadow: oklch(0.7 0.1 270 / 0.3);
+    --shadow: oklch(0.7 0 0 / 0.3);
+    --highlight: oklch(0.95 0 0);
+    --icon: oklch(0.4 0 0);
+    --downlight: var(--card);
+
+    --brighter-filter: 102%;
   }
 }
 
@@ -178,10 +187,17 @@ p {
   position: absolute;
   inset: 0;
   height: 100dvh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.1),
+    transparent
+  );
 
   overflow-y: hidden;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(1px);
+  z-index: 10;
 }
 
 .fit-screen {
@@ -210,6 +226,8 @@ p {
 
   padding: 1rem 2rem;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 
   text-decoration: none;
 
@@ -233,7 +251,11 @@ p {
   color: var(--text-blue);
 }
 
-@media screen (min-width: 1250px) {
+.icon {
+  color: var(--icon);
+}
+
+@media (min-width: 1250px) {
   :root {
     font-size: 16px;
   }

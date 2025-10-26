@@ -9,29 +9,37 @@ export type ButtonVariantTypes =
   | "info";
 export interface CustomButtonProps {
   title: string;
-  onClick?: () => void;
   variant?: ButtonVariantTypes;
   to?: string;
+  scrollOnRedirect?: boolean;
   fontSize?: number;
   style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 
 function CustomButton({
   title,
-  onClick,
   variant = "primary",
   to = "#",
+  scrollOnRedirect = true,
   fontSize = 1.15,
   style = {},
+  children,
 }: CustomButtonProps) {
+  const resetScrollOnRedirect = () => {
+    if (!scrollOnRedirect) return;
+    return window.scrollTo({ top: 0, behavior: "instant" });
+  };
+
   return (
     <Link
       to={to}
-      onClick={onClick}
+      onClick={resetScrollOnRedirect}
       className={`button-base ${variant}-btn`}
       style={style}
     >
       <p style={{ fontSize: `${fontSize}rem` }}> {title} </p>
+      {children}
     </Link>
   );
 }

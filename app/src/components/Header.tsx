@@ -25,14 +25,14 @@ function Header() {
         <NavLink to="/" className="link-text">
           Home
         </NavLink>
-        <NavLink to="/about" className="link-text">
-          About
-        </NavLink>
         <NavLink to="/tools?category=frontend" className="link-text">
           Frontend
         </NavLink>
         <NavLink to="/tools?category=backend" className="link-text">
           Backend
+        </NavLink>
+        <NavLink to="/about" className="link-text">
+          About
         </NavLink>
       </div>
 
@@ -49,13 +49,6 @@ function Header() {
               Home
             </NavLink>
             <NavLink
-              to="/about"
-              onClick={() => setIsMenuVisible(false)}
-              className="link-text"
-            >
-              About
-            </NavLink>
-            <NavLink
               to="/tools?category=frontend"
               onClick={() => setIsMenuVisible(false)}
               className="link-text"
@@ -68,6 +61,13 @@ function Header() {
               className="link-text"
             >
               Backend
+            </NavLink>
+            <NavLink
+              to="/about"
+              onClick={() => setIsMenuVisible(false)}
+              className="link-text"
+            >
+              About
             </NavLink>
             <span id="mobile-close-button" onClick={toggleMiniMenu}>
               Close

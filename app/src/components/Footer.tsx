@@ -7,14 +7,14 @@ function Footer() {
         <NavLink to="/" className="link-text">
           Home
         </NavLink>
-        <NavLink to="/about" className="link-text">
-          About
-        </NavLink>
         <NavLink to="/tools?category=frontend" className="link-text">
           Frontend
         </NavLink>
         <NavLink to="/tools?category=backend" className="link-text">
           Backend
+        </NavLink>
+        <NavLink to="/about" className="link-text">
+          About
         </NavLink>
       </div>
       <div id="dev-note">

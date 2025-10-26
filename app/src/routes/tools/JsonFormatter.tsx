@@ -96,7 +96,7 @@ function JsonFormatter() {
 
 export default JsonFormatter;
 
-var sample = `{
+const sample = `{
     "_id": "68f5690392eeb16d5065c9a7",
     "index": 0,
     "guid": "de9eec1d-6cc8-4bfb-b83b-c0fd8006eae1",

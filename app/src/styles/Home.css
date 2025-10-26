@@ -4,7 +4,7 @@
   flex-direction: column;
   width: 100%;
 
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .hero {
@@ -19,7 +19,6 @@
 
   text-align: center;
   padding: 1rem;
-  margin-bottom: 1rem;
   margin-top: 2rem;
 }
 
@@ -37,7 +36,7 @@
   background: linear-gradient(var(--bg) 40%, var(--primary-light) 60%);
   width: 100dvw;
   height: 100%;
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   overflow: hidden;
 }
@@ -45,7 +44,7 @@
 #banner-example-container {
   display: flex;
   height: 100%;
-  max-width: 84dvw;
+  width: 80dvw;
   position: relative;
 
   margin: 2rem auto;
@@ -53,8 +52,9 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   background-color: var(--card);
-  box-shadow: 0 2px 16px var(--bg-secondary);
+  box-shadow: 0 2px 16px var(--bg-muted);
 
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -106,13 +106,21 @@
 #broswer-example-content h5 {
   font-weight: 500;
 }
+.lg-show {
+  display: none;
+}
+.lg-hide {
+  display: block;
+}
 
 #example-card-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
   gap: 1.5rem;
+  position: relative;
 }
 
 .example-card {
@@ -126,9 +134,10 @@
   filter: brightness(90%);
 
   border-radius: 10px;
-  border: 1px solid var(--highlight);
+  border: 1px solid var(--border);
 
   padding: 1rem;
+  box-shadow: inset 0px 0px 10px var(--shadow);
 }
 
 .example-card:first-child > pre {
@@ -147,17 +156,23 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 650px;
+  height: 675px;
   background-color: var(--bg);
+  margin: 1rem;
 }
-
+#action-section h4 {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
 #action-card-container {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  padding: 1rem;
   width: 100%;
   justify-content: space-evenly;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .action-section-card {
@@ -165,24 +180,45 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  width: 300px;
-  height: 250px;
-  background: linear-gradient(0deg, var(--bg) 80%, var(--bg-secondary));
+  width: 320px;
+  height: 275px;
+  background: linear-gradient(0deg, var(--bg) 80%, var(--downlight));
 
   border: 1px solid var(--border-secondary);
+  border-top: var(--highlight);
   border-radius: 10px;
 
   box-shadow: 0 4px 12px 2px var(--shadow);
   color: var(--text);
 }
 
+.action-section-card:hover {
+  filter: brightness(var(--brighter-filter));
+}
+
 .action-section-card h5 {
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: -6px;
 }
 .tool-feature-list {
   font-size: 1.15rem;
   font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  #banner-example-container {
+    max-width: 500px;
+  }
+
+  #action-card-container {
+    flex-direction: row;
+  }
+
+  #action-section {
+    height: 500px;
+  }
 }
 
 @media (min-width: 960px) {
@@ -201,6 +237,19 @@
 
   #banner-example-container {
     max-width: 800px;
+  }
+
+  #example-card-container {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  .lg-show {
+    display: block;
+  }
+  .lg-hide {
+    display: none;
   }
 
   #action-section {
