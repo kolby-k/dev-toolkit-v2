@@ -1,6 +1,6 @@
 import "../styles/Home.css";
 import { MdCircle } from "react-icons/md";
-import CustomButton from "../components/CustomButton";
+import CustomLinkButton from "../components/CustomLinkButton";
 import { TiArrowRightOutline, TiArrowDownOutline } from "react-icons/ti";
 import { LiaSearchSolid } from "react-icons/lia";
 
@@ -22,14 +22,14 @@ function Home() {
       <div className="hero">
         <h1>Frontend & Backend Developer Tools</h1>
         <p>Build, debug, and optimize web apps with ease.</p>
-        <CustomButton
+        <CustomLinkButton
           title="Browse Tools"
           to="/tools"
           variant="primary"
-          style={{ marginTop: "1.5rem" }}
+          style={{ marginTop: "1.5rem", padding: "0.75rem 1.5rem" }}
         >
           <LiaSearchSolid size={16} />
-        </CustomButton>
+        </CustomLinkButton>
       </div>
 
       <div id="banner">
@@ -68,10 +68,11 @@ function Home() {
               <li>Code Formatter</li>
               <li>And More..</li>
             </ul>
-            <CustomButton
+            <CustomLinkButton
               title="Frontend"
               to="/tools?category=frontend"
               variant="primary"
+              fontSize={1}
             />
           </div>
           <div className="action-section-card">
@@ -83,10 +84,11 @@ function Home() {
               <li>Epoch Timestamp Converter</li>
               <li>And More..</li>
             </ul>
-            <CustomButton
+            <CustomLinkButton
               title="Backend"
               to="/tools?category=backend"
               variant="secondary"
+              fontSize={1}
             />
           </div>
         </span>

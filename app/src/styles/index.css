@@ -5,8 +5,6 @@
   --bg-secondary: oklch(0.2178 0 0);
   --bg-muted: oklch(0.4 0 0);
 
-  --downlight: var(--bg-muted);
-
   --text: oklch(0.955 0 0);
   --text-secondary: oklch(0.9001 0 0);
   --text-muted: oklch(0.8001 0 0);
@@ -23,7 +21,7 @@
   --card: oklch(0.937 0 0);
   --card-text: oklch(0.35 0.02 197.881);
   --divider: oklch(0.7122 0 0);
-  --border: oklch(0.5952 0 0);
+  --border: oklch(0.5 0 0);
   --border-secondary: oklch(0.2645 0 0);
 
   --btn-green: oklch(0.65 0.2 152);
@@ -34,13 +32,19 @@
   --btn-blue-light: oklch(0.85 0.2 210);
   --text-blue: oklch(0.15 0.15 210);
 
+  --btn-red: oklch(0.65 0.2 28);
+  --btn-red-light: oklch(0.85 0.2 28);
+  --text-red: oklch(0.15 0.15 28);
+
   --link: oklch(0.5 0.2 210);
   --link-2: oklch(0.55 0.2 210);
   --link-3: oklch(0.45 0.2 210);
 
   --shadow: oklch(0.3 0.1 270 / 0.3);
-  --highlight: oklch(0.9152 0 0);
+  --highlight: oklch(0.65 0 0);
   --icon: oklch(0.21 0 0);
+
+  --downlight: var(--bg-muted);
 
   --brighter-filter: 110%;
   font-size: 14px;
@@ -78,7 +82,7 @@
     --text-blue: oklch(1 0.1 210);
 
     --shadow: oklch(0.7 0 0 / 0.3);
-    --highlight: oklch(0.95 0 0);
+    --highlight: oklch(0.88 0 0);
     --icon: oklch(0.4 0 0);
     --downlight: var(--card);
 
@@ -221,20 +225,23 @@ p {
 /* BUTTON COMPONENT */
 .button-base {
   display: inline-flex;
-  min-width: 100px;
-  min-height: 50px;
+  min-width: 80px;
+  min-height: 40px;
 
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
 
   text-decoration: none;
 
-  border-radius: 1rem;
+  border-radius: 10px;
   cursor: pointer;
 }
 
+.button-base:hover {
+  filter: brightness(95%);
+}
 .primary-btn {
   font-weight: 500;
 
@@ -251,8 +258,44 @@ p {
   color: var(--text-blue);
 }
 
+.warning-btn {
+  font-weight: 500;
+
+  background-color: var(--btn-red);
+  border: 1px solid var(--btn-red-light);
+  color: var(--text-red);
+}
+
 .icon {
   color: var(--icon);
+}
+
+input {
+  background-color: var(--bg-secondary);
+
+  padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  width: 100%;
+  outline: none;
+  border: 1px solid var(--border-secondary);
+  color: var(--text);
+}
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px var(--primary-light);
+}
+
+.gradient-card {
+  background: linear-gradient(0deg, var(--bg) 80%, var(--downlight));
+  border: 1px solid var(--border);
+  border-top: 1px solid var(--highlight);
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    font-size: 15px;
+  }
 }
 
 @media (min-width: 1250px) {

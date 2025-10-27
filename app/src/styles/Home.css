@@ -129,7 +129,7 @@
   justify-content: start;
   align-items: center;
   width: 300px;
-  height: 180px;
+  height: 200px;
   background-color: var(--card);
   filter: brightness(90%);
 
@@ -184,8 +184,8 @@
   height: 275px;
   background: linear-gradient(0deg, var(--bg) 80%, var(--downlight));
 
-  border: 1px solid var(--border-secondary);
-  border-top: var(--highlight);
+  border: 1px solid var(--border);
+  border-top: 1px solid var(--highlight);
   border-radius: 10px;
 
   box-shadow: 0 4px 12px 2px var(--shadow);
@@ -200,11 +200,10 @@
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1;
-  margin-bottom: -6px;
 }
 .tool-feature-list {
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 @media (min-width: 768px) {

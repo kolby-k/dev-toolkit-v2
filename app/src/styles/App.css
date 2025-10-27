@@ -206,6 +206,7 @@
   color: var(--text-muted);
   padding: 1rem;
   font-weight: 300;
+  font-size: 0.9rem;
 }
 #developer {
   color: var(--primary);
@@ -228,21 +229,11 @@
 /* MEDIA QUERIES */
 @media (min-width: 960px) {
   .footer {
-    flex-direction: row;
-    margin-bottom: 2rem;
-  }
-
-  #dev-note {
-    position: absolute;
-    right: 10px;
-    bottom: -4px;
-    width: 220px;
-    height: auto;
-    padding: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .footer-links {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     font-weight: 600;
   }
 }
@@ -259,7 +250,7 @@
     justify-content: center;
     column-gap: 2rem;
 
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     font-weight: 600;
   }
 
