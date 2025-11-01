@@ -1,9 +1,12 @@
-import { Link, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
 import { IoMdClose } from "react-icons/io";
-import "../../styles/Tools.css";
+import { RxCrossCircled } from "react-icons/rx";
+
 import useSearchFilter from "../../hooks/useSearchFilter";
 import CustomButton from "../../components/CustomButton";
-import { RxCrossCircled } from "react-icons/rx";
+
+import "../../styles/Tools.css";
+import ToolCard from "../../components/ToolCard";
 
 function Tools() {
   const { setUserSearchInput, userSearchInput, categoryParam, filteredTools } =
@@ -57,13 +60,7 @@ function Tools() {
         <div className="tool-list">
           {filteredTools &&
             filteredTools.map((t, idx) => {
-              return (
-                <Link key={`t-${idx}`} to={t.href} className="card">
-                  <h6>{t.label} </h6>
-                  <p>{t.description}</p>
-                  <p>{t.category.join(", ")}</p>
-                </Link>
-              );
+              return <ToolCard tool={t} key={`tool-${idx}`} />;
             })}
         </div>
       </div>

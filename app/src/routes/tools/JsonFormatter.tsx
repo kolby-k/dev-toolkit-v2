@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import "../../styles/JsonFormatter.css";
+import CustomButton from "../../components/CustomButton";
 
-const MIN_ROWS = 100;
+const MIN_ROWS = 30;
 
 function JsonFormatter() {
   const [json, setJson] = useState<null | string>(null);
@@ -56,16 +57,19 @@ function JsonFormatter() {
 
   return (
     <div id="tool-full-page">
-      <div className="button-container">
-        <button type="button" onClick={formatJson}>
-          Format JSON
-        </button>
-        <button type="button" onClick={validateJson}>
-          Validate JSON
-        </button>
-        <button type="button" onClick={() => setJson(sample)}>
-          Sample JSON
-        </button>
+      <div className="button-container gradient-card">
+        <h3 id="tool-page-title">JSON Formatter</h3>
+        <span>
+          <CustomButton title="Format" onClick={formatJson} />
+          <CustomButton title="Validate" onClick={validateJson} />
+        </span>
+        <span>
+          <CustomButton
+            title="Sample JSON"
+            onClick={() => setJson(sample)}
+            variant="secondary"
+          />
+        </span>
       </div>
       {(error || success) && (
         <div className="banner">

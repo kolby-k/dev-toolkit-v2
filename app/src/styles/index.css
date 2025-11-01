@@ -45,6 +45,7 @@
   --icon: oklch(0.21 0 0);
 
   --downlight: var(--bg-muted);
+  --downlight-dim: var(--highlight);
 
   --brighter-filter: 110%;
   font-size: 14px;
@@ -52,8 +53,8 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg: oklch(0.965 0 220); /* soft off-white with blue hint */
-    --bg-secondary: oklch(0.9 0 220); /* slightly darker for sections/cards */
+    --bg: oklch(0.96 0 0); /* soft off-white with blue hint */
+    --bg-secondary: oklch(0.9 0 0); /* slightly darker for sections/cards */
     --bg-muted: oklch(0.85 0 0);
 
     --text: oklch(0.22 0 0); /* main body text (dark navy-gray) */
@@ -85,6 +86,7 @@
     --highlight: oklch(0.88 0 0);
     --icon: oklch(0.4 0 0);
     --downlight: var(--card);
+    --downlight-dim: var(--border-secondary);
 
     --brighter-filter: 102%;
   }
@@ -266,6 +268,43 @@ p {
   color: var(--text-red);
 }
 
+/* TAG COMPONENT */
+.base-tag {
+  width: fit-content;
+  padding: 0.2rem 0.5rem;
+  height: auto;
+  text-align: center;
+  border-radius: 20px;
+
+  font-weight: 600;
+}
+
+.primary-tag {
+  width: fit-content;
+  padding: 0.2rem 0.5rem;
+  height: auto;
+  text-align: center;
+
+  color: var(--text-green);
+  background: linear-gradient(0deg, var(--primary) 80%, var(--primary-light));
+
+  border: 1px solid var(--primary-dark);
+  border-top: 1px solid var(--btn-green);
+}
+
+.secondary-tag {
+  width: fit-content;
+  padding: 0.2rem 0.5rem;
+  height: auto;
+  text-align: center;
+
+  color: var(--text-blue);
+  background: linear-gradient(0deg, var(--btn-blue) 80%, var(--btn-blue-light));
+
+  border: 1px solid var(--btn-blue);
+  border-top: 1px solid var(--btn-blue-light);
+}
+
 .icon {
   color: var(--icon);
 }
@@ -290,6 +329,24 @@ input:focus {
   border: 1px solid var(--border);
   border-top: 1px solid var(--highlight);
   border-radius: 10px;
+}
+
+/* GLOBAL CLASSES */
+.flex-row-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sm-margin {
+  margin: 0.5rem;
+}
+
+.description {
+  color: var(--text);
+  text-align: left;
+  padding: 0.2rem;
+  font-size: 1.1rem;
 }
 
 @media (min-width: 768px) {
