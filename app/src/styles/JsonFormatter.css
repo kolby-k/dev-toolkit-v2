@@ -83,7 +83,7 @@
 .multiline-scroll-area {
   display: flex;
   flex: 1;
-  overflow: none; /* scrolls both gutter + textarea together */
+  overflow: hidden; /* scrolls both gutter + textarea together */
 }
 #multiline-input-gutter {
   min-height: 100%;

@@ -50,10 +50,14 @@ function JsonFormatter() {
     if (json && json.length > 0 && sample !== json) {
       return setVisible(true);
     } else {
-      return setJson(sample);
+      return setSampleJson();
     }
   };
 
+  const setSampleJson = () => {
+    setRowCount(MIN_ROWS);
+    setJson(sample);
+  };
   const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     useSampleRef.current = false;
     console.log(e.target);
@@ -87,7 +91,7 @@ function JsonFormatter() {
         <AlertDialog
           title="Insert Sample JSON"
           description="Do you want to replace the current input with sample JSON data?"
-          onUserAction={() => setJson(sample)}
+          onUserAction={setSampleJson}
           onUserActionLabel="Confirm"
           visible={visible}
           onClose={() => setVisible(false)}
