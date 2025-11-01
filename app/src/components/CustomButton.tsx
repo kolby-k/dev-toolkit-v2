@@ -30,7 +30,7 @@ function CustomButton({
       className={`button-base ${variant}-btn`}
       style={style}
     >
-      <p style={{ fontSize: `${fontSize}rem` }}> {title} </p>
+      <p style={{ fontSize: `${fontSize}rem` }}>{title}</p>
       {children}
     </button>
   );

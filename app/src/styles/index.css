@@ -9,6 +9,7 @@
   --text-secondary: oklch(0.9001 0 0);
   --text-muted: oklch(0.8001 0 0);
   --text-inverted: oklch(0.1867 0 0);
+  --text-placeholder: var(--bg-muted);
 
   --accent-orange: oklch(0.8 0.17217 84.496);
   --accent-green: oklch(0.52 0.14 152);
@@ -63,6 +64,7 @@
     --text-inverted: oklch(
       0.96 0 0
     ); /* used on dark buttons, opposite of dark theme */
+    --text-placeholder: oklch(0.5 0 0);
 
     --accent-green: oklch(0.7 0.18 152); /* medium chroma green accent */
 
@@ -170,12 +172,19 @@ p {
   line-height: 1.25;
 }
 
+textarea::placeholder {
+  color: var(--text-placeholder);
+  font-weight: 400;
+}
+
 .error-text {
   color: var(--accent-red);
+  font-weight: 500;
 }
 
 .success-text {
   color: var(--accent-green);
+  font-weight: 500;
 }
 
 .link-text {
@@ -227,7 +236,8 @@ p {
 /* BUTTON COMPONENT */
 .button-base {
   display: inline-flex;
-  min-width: 80px;
+  width: fit-content;
+  max-width: 200px;
   min-height: 40px;
 
   padding: 0.5rem 1rem;

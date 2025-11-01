@@ -1,10 +1,14 @@
 import { useRef, useState } from "react";
 import "../../styles/JsonFormatter.css";
 import CustomButton from "../../components/CustomButton";
+import AlertDialog from "../../components/AlertDialog";
 
 const MIN_ROWS = 30;
+const BUFFER = 3;
 
 function JsonFormatter() {
+  const [visible, setVisible] = useState<boolean>(false);
+
   const [json, setJson] = useState<null | string>(null);
   const [rowCount, setRowCount] = useState<number>(MIN_ROWS);
 
@@ -22,12 +26,7 @@ function JsonFormatter() {
       const t = JSON.stringify(isValid, null, 3);
       setJson(t);
     } catch (e) {
-      const msg =
-        e instanceof Error
-          ? e.message.replace("JSON.parse:", "[ERROR]: ")
-          : "Unknown Error";
-      console.error("Error Log:", e);
-      setError(msg);
+      setError(formatJSONError(e));
     }
   };
 
@@ -39,60 +38,86 @@ function JsonFormatter() {
       JSON.parse(json);
       setSuccess("JSON is Valid!");
     } catch (e) {
-      const msg =
-        e instanceof Error
-          ? e.message.replace("JSON.parse:", "[ERROR]: ")
-          : "Unknown Error";
-      setError(msg);
+      setError(formatJSONError(e));
+    }
+  };
+
+  const copyJson = () => {
+    return navigator.clipboard.writeText(json ? json : "");
+  };
+
+  const verifySampleInput = () => {
+    if (json && json.length > 0 && sample !== json) {
+      return setVisible(true);
+    } else {
+      return setJson(sample);
     }
   };
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     useSampleRef.current = false;
+    console.log(e.target);
     const numberOfRows = countLinesStreaming(e.target.value);
-    setRowCount(numberOfRows > MIN_ROWS ? numberOfRows : MIN_ROWS);
+    setRowCount(
+      numberOfRows >= MIN_ROWS - BUFFER ? numberOfRows + BUFFER : MIN_ROWS
+    );
     setJson(e.target.value);
     console.log(rowCount);
   };
 
   return (
     <div id="tool-full-page">
-      <div className="button-container gradient-card">
+      <div className="gradient-card header-container">
         <h3 id="tool-page-title">JSON Formatter</h3>
-        <span>
-          <CustomButton title="Format" onClick={formatJson} />
-          <CustomButton title="Validate" onClick={validateJson} />
-        </span>
-        <span>
-          <CustomButton
-            title="Sample JSON"
-            onClick={() => setJson(sample)}
-            variant="secondary"
-          />
-        </span>
-      </div>
-      {(error || success) && (
-        <div className="banner">
-          {success && <p className="success-text">{success}</p>}
-          {error && <p className="error-text">{error}</p>}
+        <div className="button-container">
+          <span>
+            <CustomButton title="Format" onClick={formatJson} />
+            <CustomButton title="Validate" onClick={validateJson} />
+            <CustomButton title="Copy" onClick={copyJson} />
+          </span>
+          <span>
+            <CustomButton
+              title="Sample JSON"
+              onClick={verifySampleInput}
+              variant="secondary"
+              fontSize={1}
+            />
+          </span>
         </div>
-      )}
-      <div className="multiline-input-container">
-        <div id="multiline-input-gutter">
-          {Array.from({ length: rowCount }).map((_, idx) => (
-            <p key={`gutter-${idx + 1}`} id="gutter-label">
-              {idx + 1}
-            </p>
-          ))}
-        </div>
-        <textarea
-          id="json-formatter-input"
-          name="json"
-          rows={rowCount}
-          value={json ? json : ""}
-          onChange={handleTextInputChange}
-          placeholder={useSampleRef.current ? sample : ""}
+        <AlertDialog
+          title="Insert Sample JSON"
+          description="Do you want to replace the current input with sample JSON data?"
+          onUserAction={() => setJson(sample)}
+          onUserActionLabel="Confirm"
+          visible={visible}
+          onClose={() => setVisible(false)}
         />
+        {(error || success) && (
+          <div className="banner">
+            {success && <p className="success-text">{success}</p>}
+            {error && <p className="error-text">{error}</p>}
+          </div>
+        )}
+      </div>
+
+      <div className="multiline-input-container">
+        <div className="multiline-scroll-area">
+          <div id="multiline-input-gutter">
+            {Array.from({ length: rowCount }).map((_, idx) => (
+              <span key={`gutter-${idx + 1}`} id="gutter-label">
+                {idx + 1}
+              </span>
+            ))}
+          </div>
+          <textarea
+            id="json-formatter-input"
+            name="json"
+            rows={rowCount}
+            value={json ? json : ""}
+            onChange={handleTextInputChange}
+            placeholder={useSampleRef.current ? sample : ""}
+          />
+        </div>
       </div>
     </div>
   );
@@ -121,4 +146,12 @@ function countLinesStreaming(s: string): number {
     }
   }
   return lines;
+}
+
+function formatJSONError(e: unknown) {
+  const msg =
+    e instanceof Error
+      ? e.message.replace("JSON.parse:", "Error: ")
+      : "Unknown Error";
+  return msg;
 }
