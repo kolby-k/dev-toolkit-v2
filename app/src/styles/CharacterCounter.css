@@ -1,0 +1,28 @@
+#character-counter-page {
+  text-align: center;
+
+  padding: 1rem;
+
+  /* border: 1px solid rgb(225, 233, 0); */
+}
+
+#character-count-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 1rem auto;
+
+  max-width: 80%;
+}
+
+#character-count-stats span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
+
+  min-width: 120px;
+  overflow: hidden;
+}

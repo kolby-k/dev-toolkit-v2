@@ -1,10 +1,12 @@
 import { Route, Routes } from "react-router";
+import "./styles/App.css";
+
 import Home from "./routes/Home";
-import JsonFormatter from "./routes/tools/JsonFormatter";
 import NotFound from "./routes/Not-Found";
 import Tools from "./routes/tools/Tools";
 
-import "./styles/App.css";
+import JsonFormatter from "./routes/tools/JsonFormatter";
+import CharacterCounter from "./routes/tools/CharacterCounter";
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/tools/json-formatter" element={<JsonFormatter />} />
+        <Route path="/tools/character-counter" element={<CharacterCounter />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -103,6 +103,8 @@
     --downlight-dim: var(--border-secondary);
 
     --brighter-filter: 102%;
+
+    font-size: 14px;
   }
 }
 
