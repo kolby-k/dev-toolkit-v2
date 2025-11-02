@@ -77,7 +77,12 @@ function JsonFormatter() {
           <span>
             <CustomButton title="Format" onClick={formatJson} />
             <CustomButton title="Validate" onClick={validateJson} />
-            <CustomButton title="Copy" onClick={copyJson} />
+            <CustomButton
+              title="Copy"
+              onClick={copyJson}
+              animateClick
+              loadingDurationMS={200}
+            />
           </span>
           <span>
             <CustomButton
@@ -86,16 +91,16 @@ function JsonFormatter() {
               variant="secondary"
               fontSize={1}
             />
+            <AlertDialog
+              title="Insert Sample JSON"
+              description="Do you want to replace the current input with sample JSON data?"
+              onUserAction={setSampleJson}
+              onUserActionLabel="Confirm"
+              visible={visible}
+              onClose={() => setVisible(false)}
+            />
           </span>
         </div>
-        <AlertDialog
-          title="Insert Sample JSON"
-          description="Do you want to replace the current input with sample JSON data?"
-          onUserAction={setSampleJson}
-          onUserActionLabel="Confirm"
-          visible={visible}
-          onClose={() => setVisible(false)}
-        />
         {(error || success) && (
           <div className="banner">
             {success && <p className="success-text">{success}</p>}

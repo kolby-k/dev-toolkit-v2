@@ -14,7 +14,7 @@
   align-items: center;
   text-align: center;
 
-  min-width: 300px;
+  width: min(80vw, 350px);
   max-width: 1250px;
   margin: 2rem;
   padding: 2rem;
@@ -43,7 +43,7 @@
 }
 #search-input {
   height: 2.2rem;
-  width: 90%;
+  width: 100%;
   margin: auto;
 
   font-size: 1.1rem;
