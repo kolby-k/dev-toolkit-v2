@@ -1,6 +1,8 @@
+export type TagVariantTypes = "primary" | "secondary" | "tertiary" | "misc";
+
 export interface TagProps {
   label?: string;
-  variant?: "primary" | "secondary";
+  variant?: TagVariantTypes;
   fontSize?: number;
 }
 

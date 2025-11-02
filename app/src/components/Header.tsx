@@ -25,10 +25,10 @@ function Header() {
         <NavLink to="/" className="link-text">
           Home
         </NavLink>
-        <NavLink to="/tools?category=frontend" className="link-text">
+        <NavLink to="/tools?stack=frontend" className="link-text">
           Frontend
         </NavLink>
-        <NavLink to="/tools?category=backend" className="link-text">
+        <NavLink to="/tools?stack=backend" className="link-text">
           Backend
         </NavLink>
         <NavLink to="/about" className="link-text">
@@ -49,14 +49,14 @@ function Header() {
               Home
             </NavLink>
             <NavLink
-              to="/tools?category=frontend"
+              to="/tools?stack=frontend"
               onClick={() => setIsMenuVisible(false)}
               className="link-text"
             >
               Frontend
             </NavLink>
             <NavLink
-              to="/tools?category=backend"
+              to="/tools?stack=backend"
               onClick={() => setIsMenuVisible(false)}
               className="link-text"
             >

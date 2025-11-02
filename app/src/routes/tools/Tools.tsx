@@ -9,13 +9,25 @@ import "../../styles/Tools.css";
 import ToolCard from "../../components/ToolCard";
 
 function Tools() {
-  const { setUserSearchInput, userSearchInput, categoryParam, filteredTools } =
-    useSearchFilter();
+  const {
+    setUserSearchInput,
+    userSearchInput,
+    categoryParam,
+    stackParam,
+    filteredTools,
+  } = useSearchFilter();
 
   const [, setSearchParams] = useSearchParams();
 
-  const resetParams = () => {
-    return setSearchParams();
+  // Resets only the paramLabel provided, keeping the other param as an active filter
+  const resetParams = (paramLabel: "stack" | "category") => {
+    if (paramLabel === "stack" && categoryParam) {
+      setSearchParams({ category: categoryParam });
+    } else if (paramLabel === "category" && stackParam) {
+      setSearchParams({ stack: stackParam });
+    } else {
+      setSearchParams();
+    }
   };
   return (
     <div className="page-wrapper">
@@ -36,13 +48,32 @@ function Tools() {
               />
             )}
           </div>
+          {stackParam && (
+            <div className="category-filter">
+              <label>Filter:</label>
+              <CustomButton
+                title={stackParam}
+                variant="primary"
+                onClick={() => resetParams("stack")}
+                fontSize={0.9}
+                style={{
+                  padding: "0.5rem 0.75rem",
+                  minHeight: 30,
+                  fontWeight: 400,
+                  gap: "0.5rem",
+                }}
+              >
+                <IoMdClose size={18} />
+              </CustomButton>
+            </div>
+          )}
           {categoryParam && (
             <div className="category-filter">
               <label>Category:</label>
               <CustomButton
                 title={categoryParam}
-                variant="primary"
-                onClick={resetParams}
+                variant="secondary"
+                onClick={() => resetParams("category")}
                 fontSize={0.9}
                 style={{
                   padding: "0.5rem 0.75rem",

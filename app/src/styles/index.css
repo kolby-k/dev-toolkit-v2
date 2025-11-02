@@ -37,6 +37,10 @@
   --btn-red-light: oklch(0.85 0.2 28);
   --text-red: oklch(0.15 0.15 28);
 
+  --btn-gray: oklch(0.65 0 0);
+  --btn-gray-light: oklch(0.85 0 0);
+  --text-gray: oklch(0.15 0 0);
+
   --link: oklch(0.5 0.2 210);
   --link-2: oklch(0.55 0.2 210);
   --link-3: oklch(0.45 0.2 210);
@@ -83,6 +87,14 @@
     --btn-blue: oklch(0.5 0.1 210);
     --btn-blue-light: oklch(0.6 0.25 210);
     --text-blue: oklch(1 0.1 210);
+
+    --btn-red: oklch(0.5 0.19 28);
+    --btn-red-light: oklch(0.65 0.2 28);
+    --text-red: oklch(1 0.1 28);
+
+    --btn-gray: oklch(0.5 0 0);
+    --btn-gray-light: oklch(0.65 0 0);
+    --text-gray: oklch(0.95 0 0);
 
     --shadow: oklch(0.7 0 0 / 0.3);
     --highlight: oklch(0.88 0 0);
@@ -362,32 +374,40 @@ button:active {
   border-radius: 20px;
 
   font-weight: 600;
+
+  border: 1px solid;
 }
 
 .primary-tag {
-  width: fit-content;
-  padding: 0.2rem 0.5rem;
-  height: auto;
-  text-align: center;
-
   color: var(--text-green);
   background: linear-gradient(0deg, var(--primary) 80%, var(--primary-light));
 
-  border: 1px solid var(--primary-dark);
-  border-top: 1px solid var(--btn-green);
+  border-color: var(--primary-dark);
+  border-top-color: var(--btn-green);
 }
 
 .secondary-tag {
-  width: fit-content;
-  padding: 0.2rem 0.5rem;
-  height: auto;
-  text-align: center;
-
   color: var(--text-blue);
   background: linear-gradient(0deg, var(--btn-blue) 80%, var(--btn-blue-light));
 
-  border: 1px solid var(--btn-blue);
-  border-top: 1px solid var(--btn-blue-light);
+  border-color: var(--btn-blue);
+  border-top-color: var(--btn-blue-light);
+}
+
+.tertiary-tag {
+  color: var(--text-red);
+  background: linear-gradient(0deg, var(--btn-red) 70%, var(--btn-red-light));
+
+  border-color: var(--btn-red);
+  border-top-color: var(--btn-red-light);
+}
+
+.misc-tag {
+  color: var(--text-gray);
+  background: linear-gradient(0deg, var(--btn-gray) 80%, var(--btn-gray-light));
+
+  border-color: var(--btn-gray);
+  border-top-color: var(--btn-gray-light);
 }
 
 .icon {

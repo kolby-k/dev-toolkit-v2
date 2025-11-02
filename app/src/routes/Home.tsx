@@ -70,7 +70,7 @@ function Home() {
             </ul>
             <CustomLinkButton
               title="Frontend"
-              to="/tools?category=frontend"
+              to="/tools?stack=frontend"
               variant="primary"
               fontSize={1}
             />
@@ -86,7 +86,7 @@ function Home() {
             </ul>
             <CustomLinkButton
               title="Backend"
-              to="/tools?category=backend"
+              to="/tools?stack=backend"
               variant="secondary"
               fontSize={1}
             />

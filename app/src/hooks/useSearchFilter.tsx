@@ -9,6 +9,9 @@ function useSearchFilter() {
   const categoryParamRaw = params.get("category");
   const categoryParam = categoryParamRaw?.toLowerCase() ?? "";
 
+  const stackParamRaw = params.get("stack");
+  const stackParam = stackParamRaw?.toLowerCase() ?? "";
+
   const filteredTools = useMemo<ToolItem[]>(() => {
     const userSearch = userSearchInput.trim().toLowerCase();
 
@@ -18,21 +21,36 @@ function useSearchFilter() {
       return t.category.some((c) => c.toLowerCase() === categoryParam);
     });
 
-    if (!userSearch) return byCategory;
+    const byStack = byCategory.filter((t) => {
+      if (!stackParam) return true;
+      // return frontend or backend tools if stack param is defined, else no match
+      return stackParam === "frontend"
+        ? t.isFrontend
+        : stackParam === "backend"
+        ? t.isBackend
+        : false;
+    });
 
-    return byCategory.filter((t) => {
+    if (!userSearch) return byStack;
+
+    return byStack.filter((t) => {
       const labelMatch = t.label.toLowerCase().includes(userSearch);
       const categoryMatch = t.category.some((c) =>
         c.toLowerCase().includes(userSearch)
       );
-      return labelMatch || categoryMatch;
+      const stackMatch =
+        (t.isFrontend && "frontend".includes(userSearch.toLowerCase())) ||
+        (t.isBackend && "backend".includes(userSearch.toLowerCase()));
+
+      return labelMatch || categoryMatch || stackMatch;
     });
-  }, [categoryParam, userSearchInput]);
+  }, [categoryParam, userSearchInput, stackParam]);
 
   return {
     userSearchInput,
     setUserSearchInput,
     categoryParam,
+    stackParam,
     filteredTools,
   };
 }

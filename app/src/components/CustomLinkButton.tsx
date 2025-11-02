@@ -1,5 +1,6 @@
 import type React from "react";
 import { Link } from "react-router";
+import resetScrollOnRedirect from "../utils/resetWindowScroll";
 
 export type ButtonVariantTypes =
   | "primary"
@@ -26,16 +27,16 @@ function CustomLinkButton({
   style = {},
   children,
 }: CustomLinkButtonProps) {
-  const resetScrollOnRedirect = async () => {
+  // force window to scroll to top when redirecting to new page (50ms delay for smoother transition)
+  const onRedirect = async () => {
     if (!scrollOnRedirect) return;
-    await new Promise((r) => setTimeout(r, 50));
-    return window.scrollTo({ top: 0, behavior: "smooth" });
+    await resetScrollOnRedirect(50);
   };
 
   return (
     <Link
       to={to}
-      onClick={resetScrollOnRedirect}
+      onClick={onRedirect}
       className={`button-base ${variant}-btn`}
       style={style}
     >
