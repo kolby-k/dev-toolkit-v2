@@ -1,8 +1,8 @@
 import "../styles/Home.css";
 import { MdCircle } from "react-icons/md";
 import CustomLinkButton from "../components/CustomLinkButton";
-import { TiArrowRightOutline, TiArrowDownOutline } from "react-icons/ti";
 import { LiaSearchSolid } from "react-icons/lia";
+import { FaArrowDown, FaLongArrowAltRight } from "react-icons/fa";
 
 function Home() {
   // preserve whitespace exactly by using <pre> tags
@@ -46,8 +46,8 @@ function Home() {
                 <h5>Before</h5>
                 <pre>{messyJSON}</pre>
               </div>
-              <TiArrowRightOutline size={28} className="icon lg-show" />
-              <TiArrowDownOutline size={28} className="icon lg-hide" />
+              <FaLongArrowAltRight size={28} className="icon lg-show" />
+              <FaArrowDown size={28} className="icon lg-hide" />
               <div className="example-card">
                 <h5>After</h5>
                 <pre>{formattedJSON}</pre>

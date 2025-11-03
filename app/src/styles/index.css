@@ -263,9 +263,9 @@ input:focus {
 }
 
 .gradient-card {
-  background: linear-gradient(0deg, var(--bg) 80%, var(--downlight));
+  background: linear-gradient(0deg, var(--bg) 50%, var(--bg-secondary));
   border: 1px solid var(--border);
-  border-top: 1px solid var(--highlight);
+  border-top: 1px solid var(--downlight);
   border-radius: 10px;
 }
 

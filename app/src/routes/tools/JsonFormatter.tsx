@@ -1,21 +1,16 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "../../styles/JsonFormatter.css";
 import CustomButton from "../../components/CustomButton";
 import AlertDialog from "../../components/AlertDialog";
-
-const MIN_ROWS = 30;
-const BUFFER = 3;
+import CustomTextArea from "../../components/CustomTextArea";
 
 function JsonFormatter() {
-  const [visible, setVisible] = useState<boolean>(false);
-
   const [json, setJson] = useState<null | string>(null);
-  const [rowCount, setRowCount] = useState<number>(MIN_ROWS);
+
+  const [visible, setVisible] = useState<boolean>(false);
 
   const [error, setError] = useState<null | string>(null);
   const [success, setSuccess] = useState<null | string>(null);
-
-  const useSampleRef = useRef(true);
 
   const formatJson = () => {
     if (!json) return;
@@ -55,25 +50,14 @@ function JsonFormatter() {
   };
 
   const setSampleJson = () => {
-    setRowCount(MIN_ROWS);
     setJson(sample);
-  };
-  const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    useSampleRef.current = false;
-    console.log(e.target);
-    const numberOfRows = countLinesStreaming(e.target.value);
-    setRowCount(
-      numberOfRows >= MIN_ROWS - BUFFER ? numberOfRows + BUFFER : MIN_ROWS
-    );
-    setJson(e.target.value);
-    console.log(rowCount);
   };
 
   return (
     <div id="tool-full-page">
-      <div className="gradient-card header-container">
+      <div className="header-container">
         <h3 id="tool-page-title">JSON Formatter</h3>
-        <div className="button-container">
+        <div className="json-formatter-button-container">
           <span>
             <CustomButton title="Format" onClick={formatJson} />
             <CustomButton title="Validate" onClick={validateJson} />
@@ -107,25 +91,8 @@ function JsonFormatter() {
             {error && <p className="error-text">{error}</p>}
           </div>
         )}
-      </div>
-
-      <div className="multiline-input-container">
-        <div className="multiline-scroll-area">
-          <div id="multiline-input-gutter">
-            {Array.from({ length: rowCount }).map((_, idx) => (
-              <span key={`gutter-${idx + 1}`} id="gutter-label">
-                {idx + 1}
-              </span>
-            ))}
-          </div>
-          <textarea
-            id="json-formatter-input"
-            name="json"
-            rows={rowCount}
-            value={json ? json : ""}
-            onChange={handleTextInputChange}
-            placeholder={useSampleRef.current ? sample : ""}
-          />
+        <div>
+          <CustomTextArea text={json ? json : ""} setText={setJson} />
         </div>
       </div>
     </div>
@@ -141,21 +108,6 @@ const sample = `{
     "isActive": true,
     "balance": "$1,834.77"
   }`;
-
-function countLinesStreaming(s: string): number {
-  if (s.length === 0) return 0;
-  let lines = 1;
-  for (let i = 0; i < s.length; i++) {
-    const ch = s.charCodeAt(i);
-    if (ch === 10) lines++; // \n
-    else if (ch === 13) {
-      // \r\n or lone \r
-      lines++;
-      if (s.charCodeAt(i + 1) === 10) i++; // skip \n in \r\n
-    }
-  }
-  return lines;
-}
 
 function formatJSONError(e: unknown) {
   const msg =

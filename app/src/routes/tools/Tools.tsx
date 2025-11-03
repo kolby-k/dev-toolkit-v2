@@ -32,9 +32,9 @@ function Tools() {
   return (
     <div className="page-wrapper">
       <div className="tool-section">
-        <div className="input-container gradient-card">
-          <h3>Tool Search</h3>
-          <div className="search-container">
+        <div className="tool-search-container">
+          <h2>Tool Search</h2>
+          <div className="search-input-wrapper">
             <input
               type="text"
               value={userSearchInput ?? ""}
