@@ -52,14 +52,6 @@ export const TOOLS: ToolItem[] = [
     isBackend: false,
   },
   {
-    label: "JWT Encode",
-    description: "Encode data and create a JSON Web Token.",
-    href: "/tools/jwt-encode",
-    category: ["security"],
-    isFrontend: false,
-    isBackend: true,
-  },
-  {
     label: "Color Picker",
     description: "Easily compare colors and copy them as CSS snippets.",
     href: "/tools/color-picker",
