@@ -1,19 +1,26 @@
 #api-key-result {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 0.5rem;
 
+  height: 60px;
+  width: 100%;
+  max-width: min(1000px, 90vw);
+  padding: 0.6rem 0.9rem;
+
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border, #444);
+  border-radius: 8px;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9rem;
   color: var(--text);
-  width: min(90dvw, 575px);
 
-  border-radius: 10px;
-
-  padding: 0.5rem 1rem;
-
-  height: 3rem;
-
-  scrollbar-color: var(--bg-muted) var(--bg-secondary);
+  white-space: nowrap;
+  overflow-x: auto; /* enables horizontal scroll for long keys */
+  overflow-y: hidden;
+  scrollbar-width: thin; /* Firefox */
 }
 
 #api-key-result.active {
@@ -27,11 +34,19 @@
 }
 
 #api-key-result p {
-  width: 100%;
-  overflow: auto;
-
   font-size: 1.1rem;
   line-height: 2.5;
+  margin: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-overflow: clip; /* remove ellipsis entirely */
+
+  padding-right: 5%;
+  width: 100%;
+  position: relative;
+
+  -webkit-mask-image: linear-gradient(to right, black 90%, transparent);
+  mask-image: linear-gradient(to right, black 90%, transparent);
 }
 
 #download-text-link {
@@ -45,7 +60,11 @@
   color: var(--text-muted);
   font-size: 1.2rem;
 
+  position: relative;
   cursor: pointer;
+
+  height: 100%;
+  width: 20px;
 }
 
 #copy-icon:hover {
@@ -59,4 +78,52 @@
 #copy-icon-success {
   color: var(--primary-dark);
   font-size: 1.2rem;
+}
+
+#number-input-wrapper {
+  display: flex;
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.number-input {
+  width: 70px;
+  height: 60px;
+  font-size: 1.1rem;
+
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+#number-input-wrapper button {
+  height: 20px;
+  width: 18px;
+  background: linear-gradient(var(--bg), var(--bg-secondary));
+  border-radius: 4px;
+
+  color: var(--text);
+  border: 1px solid var(--border-secondary);
+
+  cursor: pointer;
+}
+#number-input-wrapper button:first-of-type {
+  position: absolute;
+  top: 20%;
+  transform: translateY(-20%);
+  right: 2px;
+}
+#number-input-wrapper button:last-of-type {
+  position: absolute;
+  bottom: 20%;
+  transform: translateY(20%);
+  right: 2px;
+}
+#number-input-wrapper button:disabled {
+  cursor: not-allowed;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
