@@ -58,10 +58,34 @@ function APIKeyGenerator() {
     <div id="tool-page-content">
       <div id="tool-title-section">
         <h2>API Key Generator</h2>
+        <div className="description-container">
+          <p>
+            An API key is a long, random-looking string — much like a strong
+            password — used to uniquely identify and authorize a client or
+            application when it communicates with an API.
+          </p>
+          <p>
+            A well-designed key isn't just “random”; it's generated using
+            cryptographically secure randomness, meaning the values are chosen
+            by algorithms designed to be mathematically unpredictable — not
+            based on time, sequence, or user input.
+          </p>
+          <p>
+            The key's entropy (its measure of unpredictability) and length (how
+            many bits it contains) together determine its strength. For example,
+            a 128-bit key has 2¹²⁸ possible combinations — so large that
+            guessing it would take millions of years even with powerful
+            computers.
+          </p>
+          <p>
+            By contrast, a weak key might be short, like abcd1234, or generated
+            using simple patterns or timestamps, making it much easier to
+            predict or brute-force.
+          </p>
+        </div>
       </div>
       <div id="tool-wrapper-small">
-        <h6 style={{ fontWeight: 500 }}>API Key:</h6>
-        <label>Length:</label>
+        <label style={{ marginBottom: "-10px" }}>Length:</label>
         <span id="number-input-wrapper">
           <input
             type="number"

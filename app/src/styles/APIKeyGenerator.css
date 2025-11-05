@@ -85,6 +85,7 @@
   position: relative;
   border: 1px solid var(--border);
   border-radius: 10px;
+  margin-bottom: 1rem;
 }
 .number-input {
   width: 70px;
@@ -126,4 +127,36 @@
 .number-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.description-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 1rem;
+  padding: 0.5rem 0;
+  margin-top: 1rem;
+
+  color: var(--text-secondary);
+}
+
+.description-container p {
+  width: 70%;
+  min-width: 300px;
+  text-align: left;
+
+  font-size: 1.2rem;
+}
+
+@media (min-width: 1250px) {
+  .description-container p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .description-container p {
+    width: 60%;
+  }
 }
