@@ -8,6 +8,7 @@ import Tools from "./routes/tools/Tools";
 import JsonFormatter from "./routes/tools/JsonFormatter";
 import CharacterCounter from "./routes/tools/CharacterCounter";
 import APIKeyGenerator from "./routes/tools/APIKeyGenerator";
+import ColorPicker from "./routes/tools/ColorPicker";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/tools/json-formatter" element={<JsonFormatter />} />
         <Route path="/tools/character-counter" element={<CharacterCounter />} />
         <Route path="/tools/api-key-generator" element={<APIKeyGenerator />} />
+        <Route path="/tools/color-picker" element={<ColorPicker />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
