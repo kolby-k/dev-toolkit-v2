@@ -54,6 +54,8 @@
   font-weight: 500;
   text-decoration: underline;
   margin-top: 1rem;
+
+  cursor: pointer;
 }
 
 #copy-icon {
@@ -82,42 +84,42 @@
 
 #number-input-wrapper {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
   position: relative;
-  border: 1px solid var(--border);
   border-radius: 10px;
   margin-bottom: 1rem;
+
+  width: 100%;
 }
 .number-input {
-  width: 70px;
+  width: 60px;
   height: 60px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  padding-left: 1rem;
+
+  border: 1px solid var(--border);
 
   -moz-appearance: textfield;
   appearance: textfield;
 }
 #number-input-wrapper button {
-  height: 20px;
-  width: 18px;
-  background: linear-gradient(var(--bg), var(--bg-secondary));
+  height: 30px;
+  width: 80px;
+  background: linear-gradient(var(--bg-secondary), var(--bg-muted));
   border-radius: 4px;
 
+  font-size: 1rem;
+  line-height: 1;
   color: var(--text);
   border: 1px solid var(--border-secondary);
 
   cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow);
 }
-#number-input-wrapper button:first-of-type {
-  position: absolute;
-  top: 20%;
-  transform: translateY(-20%);
-  right: 2px;
-}
-#number-input-wrapper button:last-of-type {
-  position: absolute;
-  bottom: 20%;
-  transform: translateY(20%);
-  right: 2px;
-}
+
 #number-input-wrapper button:disabled {
   cursor: not-allowed;
 }

@@ -415,3 +415,13 @@ button:active {
 .icon {
   color: var(--icon);
 }
+
+.webkit-mask-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 75%);
+  mask-image: linear-gradient(to bottom, black 20%, transparent 75%);
+}
+
+.webkit-mask-right {
+  -webkit-mask-image: linear-gradient(to right, black 90%, transparent);
+  mask-image: linear-gradient(to right, black 90%, transparent);
+}
