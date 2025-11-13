@@ -276,6 +276,13 @@ input:focus {
   flex-wrap: wrap;
 }
 
+.flex-col-container {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
+}
+
 .sm-margin {
   margin: 0.5rem;
 }

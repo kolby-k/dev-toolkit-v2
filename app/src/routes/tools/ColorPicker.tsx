@@ -3,37 +3,43 @@ import ColorHarmony from "../../components/ColorHarmony";
 import ColorPickerSelector from "../../components/ColorPickerSelector";
 import styles from "../../styles/ColorPicker.module.css";
 
-export type ColorPickerData = {
-  primary: string;
-  secondary: string;
-};
+export type ColorPickerData = { color: string; label: string };
 
 function ColorPicker() {
-  const [data, setData] = useState<ColorPickerData>({
-    primary: "rgb(0,0,0)",
-    secondary: "rgb(255,255,255)",
-  });
+  const [data, setData] = useState<ColorPickerData[]>([
+    {
+      color: "rgb(0,0,0)",
+      label: "Primary",
+    },
+  ]);
 
   const handleNewPrimary = (newColor: string) => {
-    setData((prev) => ({ ...prev, primary: newColor }));
+    const newData = [{ color: newColor, label: "Primary" }];
+    setData(newData);
   };
 
   return (
     <div className={styles.page}>
+      <h4
+        style={{
+          textAlign: "center",
+          padding: "1rem",
+        }}
+      >
+        Color Picker
+      </h4>
       <div className={styles.grid}>
         <div className={styles.trow}>
           <div className={styles.trow1}>
-            Color Picker
             <ColorPickerSelector
-              color={data.primary}
+              color={
+                data.find((c) => c.label === "Primary")?.color || "rgb(0,0,0)"
+              }
               setColor={handleNewPrimary}
             />
           </div>
           <div className={styles.trow2}>
-            <ColorHarmony
-              primaryColor={data.primary}
-              secondaryColor={data.secondary}
-            />
+            <ColorHarmony colorList={data} setColorList={setData} />
           </div>
         </div>
         <div className={styles.brow}>

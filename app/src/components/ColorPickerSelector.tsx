@@ -8,6 +8,7 @@ export interface ColorPickerSelectorProps {
   height?: number;
   // OKLCH controls (optional)
   oklchC?: number; // 0..~0.37 typical gamut; default 0.1
+  showSample?: boolean;
 }
 
 const COLOR_SPACE_OPTIONS: ColorSpaceType[] = ["rgb", "hsl", "oklch"];
@@ -117,7 +118,7 @@ function formatColorSpace(
   // oklch
   const [L, C, h] = rgbToOklch(r, g, b);
   const p = (x: number, d = 4) => Number(x.toFixed(d));
-  return `oklch(${p(L)} ${p(C)} ${p(h)})`;
+  return `oklch(${p(L, 2)} ${p(C, 2)} ${p(h, 2)})`;
 }
 // ---------- Component ----------
 
@@ -127,6 +128,7 @@ function ColorPickerSelector({
   width = 300,
   height = 200,
   oklchC = 0.1,
+  showSample = false,
 }: ColorPickerSelectorProps) {
   const [colorSpace, setColorSpace] = useState<ColorSpaceType>("rgb");
 
@@ -216,41 +218,39 @@ function ColorPickerSelector({
   };
 
   return (
-    <div style={{ textAlign: "center", border: "1px solid red" }}>
-      <canvas
-        ref={canvasRef}
-        onClick={handleClick}
-        style={{ border: "1px solid #333", cursor: "crosshair" }}
-      />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        alignItems: "center",
+      }}
+    >
       <div
         style={{
-          border: "1px solid brown",
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          fontSize: "1.25rem",
+          fontWeight: 500,
+          margin: "1rem",
         }}
       >
-        <p>
-          Selected Color:{" "}
-          <span
-            style={{
-              display: "inline-block",
-              minWidth: 80,
-              height: 24,
-              verticalAlign: "middle",
-              background: colorSpace === "oklch" ? color : undefined,
-              backgroundColor: colorSpace !== "oklch" ? color : undefined,
-              border: "1px solid #ccc",
-              marginLeft: 8,
-            }}
-            title={color}
-          />
-          {/* <code style={{ marginLeft: 8 }}>{color}</code> */}
-        </p>
-      </div>
-      <div>
         Color Space
         <select
           id="color-space-choice"
+          style={{
+            width: 200,
+            backgroundColor: "var(--input)",
+            color: "var(--text)",
+            padding: "6px",
+            border: "1px solid var(--border)",
+            borderRadius: 4,
+            fontSize: "1.05rem",
+            margin: 4,
+          }}
           value={colorSpace ?? ""}
           onChange={(e) => setColorSpace(e.target.value as ColorSpaceType)}
         >
@@ -261,6 +261,40 @@ function ColorPickerSelector({
           ))}
         </select>
       </div>
+      <canvas
+        ref={canvasRef}
+        onClick={handleClick}
+        style={{ border: "1px solid #333", cursor: "crosshair" }}
+      />
+      {showSample && (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            fontSize: "1.25rem",
+            fontWeight: 500,
+            margin: "1rem",
+            gap: "0.5rem",
+          }}
+        >
+          <span
+            style={{
+              display: "inline-block",
+              width: 80,
+              height: 24,
+              background: color,
+              border: "1px solid #ccc",
+            }}
+            title={color}
+          />
+          <p>
+            <code>{color}</code>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

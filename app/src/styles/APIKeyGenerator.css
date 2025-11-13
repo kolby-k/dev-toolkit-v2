@@ -108,13 +108,13 @@
 #number-input-wrapper button {
   height: 30px;
   width: 80px;
-  background: linear-gradient(var(--bg-secondary), var(--bg-muted));
+  background: linear-gradient(var(--divider), var(--bg-muted));
   border-radius: 4px;
 
   font-size: 1rem;
   line-height: 1;
-  color: var(--text);
-  border: 1px solid var(--border-secondary);
+  color: var(--icon);
+  border: 1px solid var(--border);
 
   cursor: pointer;
   box-shadow: 0 2px 8px var(--shadow);

@@ -1,7 +1,8 @@
 .page {
   display: flex;
-  background: var(--bg-secondary);
+  background: var(--bg);
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .grid {
@@ -28,12 +29,19 @@
   height: 50vh;
   max-width: 500px;
   min-width: 350px;
+  overflow: hidden;
+
+  padding: 1rem;
+
   border: 1px solid green;
 }
 .trow2 {
   height: 50vh;
-  width: 400px;
+  max-width: 60svw;
   min-width: 300px;
+
+  position: relative;
+
   border: 1px solid yellow;
 }
 
@@ -53,6 +61,7 @@
   height: 200px;
   border: 1px solid black;
 }
+
 /* 
 @media (min-width: 780px) {
   .trow {
