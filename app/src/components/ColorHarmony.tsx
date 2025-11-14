@@ -100,6 +100,7 @@ function deriveColorCombinations(
   let tertiary;
   let quaternary;
 
+  // 1 secondary color, opposite of primary, creating strong contrast.
   if (colorCombination === "complementary") {
     secondary = { color: "rgba(52, 27, 153, 1)", label: "Secondary" };
     colorList.push(secondary);
@@ -110,11 +111,13 @@ function deriveColorCombinations(
     colorList.push(secondary);
   }
 
+  // A set of colors that are different hues, but close together on the color wheel
   if (colorCombination === "analogous") {
     secondary = { color: "rgba(153, 27, 27, 1)", label: "Secondary" };
     colorList.push(secondary);
   }
 
+  // One hue, with changes only in lightness and chroma/saturation.
   if (colorCombination === "monochromatic") {
     const newSecondary = getMonochromaticColor(primaryColor);
     if (newSecondary) colorList.push(newSecondary);

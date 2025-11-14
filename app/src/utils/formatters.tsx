@@ -1,3 +1,3 @@
 export function p(x: number, d = 4) {
-  Number(x.toFixed(d));
+  return Number(x.toFixed(d));
 }
