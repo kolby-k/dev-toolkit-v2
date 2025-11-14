@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { p } from "../utils/formatters";
 
 export type ColorSpaceType = "rgb" | "hsl" | "oklch";
 export interface ColorPickerSelectorProps {
@@ -117,7 +118,6 @@ function formatColorSpace(
   }
   // oklch
   const [L, C, h] = rgbToOklch(r, g, b);
-  const p = (x: number, d = 4) => Number(x.toFixed(d));
   return `oklch(${p(L, 2)} ${p(C, 2)} ${p(h, 2)})`;
 }
 // ---------- Component ----------

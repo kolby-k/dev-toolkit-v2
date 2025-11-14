@@ -9,14 +9,19 @@
   display: grid;
   gap: 1rem;
   padding: 1rem;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  border: 1px solid white;
 }
 
 .trow {
   display: flex;
-  flex: 1;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   max-width: 1250px;
+  width: 100%;
 
   margin: auto;
   padding: 1rem;
@@ -36,6 +41,9 @@
   border: 1px solid green;
 }
 .trow2 {
+  display: flex;
+  flex: 1;
+
   height: 50vh;
   max-width: 60svw;
   min-width: 300px;
@@ -60,6 +68,84 @@
 .brow1 {
   height: 200px;
   border: 1px solid black;
+}
+
+/* Color Harmony */
+
+.colorHarmonySkeleton {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+
+  animation: 2s linear infinite BackgroundSkeleton;
+}
+
+.colorComboContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  font-size: 1.25rem;
+  font-weight: 500;
+
+  margin: 1rem;
+}
+
+.colorComboDropdown {
+  width: 200px;
+  background-color: var(--input);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+
+  font-size: 1.05rem;
+
+  margin: 4px;
+  padding: 6px;
+}
+
+.colorPalleteCardWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 1rem;
+}
+
+.colorHarmonyContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1rem;
+  padding: 1rem;
+}
+
+@keyframes BackgroundSkeleton {
+  0% {
+    background-color: var(--bg);
+  }
+  25% {
+    background-color: var(--bg-secondary);
+  }
+  50% {
+    background-color: var(--bg-muted);
+  }
+  75% {
+    background-color: var(--bg-secondary);
+  }
+  100% {
+    background-color: var(--bg);
+  }
 }
 
 /* 

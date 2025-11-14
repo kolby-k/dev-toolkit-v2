@@ -14,6 +14,9 @@ function ColorPicker() {
   ]);
 
   const handleNewPrimary = (newColor: string) => {
+    const currentPrimary = data.find((c) => c.label === "Primary");
+    if (newColor === currentPrimary?.color) return;
+
     const newData = [{ color: newColor, label: "Primary" }];
     setData(newData);
   };
