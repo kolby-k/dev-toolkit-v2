@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import ColorPalleteCard from "./ColorPalleteCard";
 import type { ColorPickerData } from "../routes/tools/ColorPicker";
 import styles from "../styles/ColorPicker.module.css";
-import { getMonochromaticColor } from "../utils/colorCombinations";
+import {
+  getAnalogousColors,
+  getMonochromaticColor,
+} from "../utils/colorCombinations";
 
 export interface ColorHarmonyProps {
   colorList: ColorPickerData[];
@@ -127,14 +130,14 @@ function deriveColorCombinations(
 
   // A set of colors that are different hues, but close together on the color wheel
   if (colorCombination === "analogous") {
-    secondary = { color: "rgba(153, 27, 27, 1)", label: "Secondary" };
-    colorList.push(secondary);
+    const newColors = getAnalogousColors(primaryColor);
+    if (newColors) colorList.push(...newColors);
   }
 
   // One hue, with changes only in lightness and chroma/saturation.
   if (colorCombination === "monochromatic") {
     const newSecondary = getMonochromaticColor(primaryColor);
-    if (newSecondary) colorList.push(newSecondary);
+    if (newSecondary) colorList.push(...newSecondary);
   }
 
   if (colorCombination === "triad") {

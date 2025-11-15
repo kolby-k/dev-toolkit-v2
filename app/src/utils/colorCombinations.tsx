@@ -1,6 +1,7 @@
 import type { ColorSpaceType } from "../components/ColorPickerSelector";
 import type { ColorPickerData } from "../routes/tools/ColorPicker";
-import { clamp100p, clamp255 } from "./clamp";
+import { clamp100p, clamp255, clamp360 } from "./clamp";
+import { hslToRgb, rgbToHsl } from "./colorConversions";
 import { p } from "./formatters";
 
 export type ColorSpaceData = {
@@ -52,7 +53,7 @@ const getColorSpaceType = (primaryColor: string): ColorSpaceData => {
 // - Monochormatic colors share the same hue, but vary in lightness; with subtle shifts in chroma/saturation.
 export function getMonochromaticColor(
   primaryColor: string
-): ColorPickerData | null {
+): ColorPickerData[] | null {
   const { colorSpace, values, min, max } = getColorSpaceType(primaryColor);
 
   let secondary = null;
@@ -118,11 +119,84 @@ export function getMonochromaticColor(
     secondary = { color: `oklch(${l} ${c} ${h})`, label: "Secondary" };
   }
 
-  return secondary;
+  return [secondary as ColorPickerData];
 }
 
-// NEW - TODO
 // return a set of 2 colors that are different hues, but close together on the color wheel
-export function getAnalogousColors(primaryColor: string) {
-  return primaryColor;
+export function getAnalogousColors(
+  primaryColor: string
+): ColorPickerData[] | null {
+  const { colorSpace, values } = getColorSpaceType(primaryColor);
+
+  let tint; // lighter
+  let shade; // darker
+
+  // convert to HSL for shifting hue
+  if (colorSpace === "rgb") {
+    const [r, g, b] = values;
+    const [h, s, l] = rgbToHsl(r, g, b);
+
+    const scaleValue = 20;
+    const hPlus = (h + scaleValue + 360) % 360;
+    const hMinus = (h - scaleValue + 360) % 360;
+
+    const [tr, tg, tb] = hslToRgb(hPlus, s, l);
+    const [sr, sg, sb] = hslToRgb(hMinus, s, l);
+
+    tint = {
+      color: `rgb(${tr},${tg},${tb})`,
+      label: "Secondary",
+    } as ColorPickerData;
+
+    shade = {
+      color: `rgb(${sr},${sg},${sb})`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  // adjust hue, keep s and l similiar
+  if (colorSpace === "hsl") {
+    const scaleValue = 20;
+    const [th, ts, tl] = values.map((v, idx) => {
+      const newVal = idx === 0 ? v + scaleValue : v;
+      return Math.round(clamp360(newVal));
+    });
+    const [sh, ss, sl] = values.map((v, idx) => {
+      const newVal = idx === 0 ? v - scaleValue : v;
+      return Math.round(clamp360(newVal));
+    });
+    tint = {
+      color: `hsl(${th} ${ts}% ${tl}%)`,
+      label: "Secondary",
+    } as ColorPickerData;
+    shade = {
+      color: `hsl(${sh} ${ss}% ${sl}%)`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  if (colorSpace === "oklch") {
+    const scaleValue = 30;
+
+    const [tl, tc, th] = values.map((v, idx) => {
+      const newVal = idx === 2 ? p(clamp360(v + scaleValue), 2) : v;
+      return newVal;
+    });
+    const [sl, sc, sh] = values.map((v, idx) => {
+      const newVal = idx === 2 ? p(clamp360(v - scaleValue), 2) : v;
+      return newVal;
+    });
+    tint = {
+      color: `oklch(${tl} ${tc} ${th})`,
+      label: "Secondary",
+    } as ColorPickerData;
+    shade = {
+      color: `oklch(${sl} ${sc} ${sh})`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  if (!tint || !shade) return null;
+
+  return [tint, shade];
 }

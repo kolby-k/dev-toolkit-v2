@@ -9,3 +9,7 @@ export function clamp100(value: number) {
 export function clamp100p(value: number) {
   return Math.min(1, Math.max(0, value));
 }
+
+export function clamp360(value: number) {
+  return Math.min(360, Math.max(0, value));
+}
