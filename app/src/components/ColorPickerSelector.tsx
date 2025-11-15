@@ -224,6 +224,7 @@ function ColorPickerSelector({
         flexDirection: "column",
         gap: "1rem",
         alignItems: "center",
+        paddingBottom: "2rem",
       }}
     >
       <div
@@ -243,7 +244,7 @@ function ColorPickerSelector({
           id="color-space-choice"
           style={{
             width: 200,
-            backgroundColor: "var(--input)",
+            backgroundColor: "var(--bg-muted)",
             color: "var(--text)",
             padding: "6px",
             border: "1px solid var(--border)",
@@ -264,7 +265,11 @@ function ColorPickerSelector({
       <canvas
         ref={canvasRef}
         onClick={handleClick}
-        style={{ border: "1px solid #333", cursor: "crosshair" }}
+        style={{
+          border: "1px solid #333",
+          cursor: "crosshair",
+          borderRadius: 8,
+        }}
       />
       {showSample && (
         <div

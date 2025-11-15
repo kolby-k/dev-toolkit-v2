@@ -13,12 +13,13 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
 
-  border: 1px solid white;
+  /* border: 1px solid white; */
 }
 
 .trow {
   display: flex;
   justify-content: center;
+  align-items: start;
   flex-wrap: wrap;
   max-width: 1250px;
   width: 100%;
@@ -27,30 +28,34 @@
   padding: 1rem;
   gap: 1rem;
 
-  border: 1px solid orange;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+
+  border-radius: 8px;
 }
 
 .trow1 {
-  height: 50vh;
-  max-width: 500px;
-  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+
+  min-width: 50%;
   overflow: hidden;
 
   padding: 1rem;
+  justify-content: space-evenly;
 
-  border: 1px solid green;
+  border-radius: 10px;
 }
 .trow2 {
   display: flex;
   flex: 1;
+  justify-content: center;
 
-  height: 50vh;
-  max-width: 60svw;
   min-width: 300px;
 
   position: relative;
 
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
 }
 
 .brow {
@@ -95,7 +100,7 @@
 
 .colorComboDropdown {
   width: 200px;
-  background-color: var(--input);
+  background-color: var(--bg-muted);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -130,6 +135,11 @@
   padding: 1rem;
 }
 
+.colorCodeCheckboxLabel {
+  margin: 1rem auto 0.5rem;
+  text-align: center;
+  font-size: 1rem;
+}
 @keyframes BackgroundSkeleton {
   0% {
     background-color: var(--bg);
@@ -148,6 +158,80 @@
   }
 }
 
+/* COLOR PALLETE CARD */
+.colorPalleteCard {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  width: 15rem;
+  height: 10rem;
+
+  position: relative;
+
+  border: 1px solid var(--bg-muted);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.colorPalleteCard:active {
+  animation: 150ms ease-in ClipboardCopy;
+}
+
+.colorPalleteCardText {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  align-items: center;
+
+  background-color: var(--shadow);
+
+  border-radius: 4px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 1rem;
+}
+
+.colorPalleteCardTextHidden {
+  opacity: 0;
+}
+
+.colorPalleteCard:hover > span {
+  opacity: 1;
+}
+
+.colorPalleteCardText p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes ClipboardCopy {
+  0% {
+    filter: brightness(100%);
+    transform: scale(1);
+  }
+  25% {
+    filter: brightness(90%);
+    transform: scale(0.98);
+  }
+  50% {
+    filter: brightness(80%);
+    transform: scale(0.95);
+  }
+  75% {
+    filter: brightness(90%);
+    transform: scale(0.98);
+  }
+  100% {
+    filter: brightness(100%);
+    transform: scale(1);
+  }
+}
 /* 
 @media (min-width: 780px) {
   .trow {

@@ -52,6 +52,8 @@
   --downlight: var(--bg-muted);
   --downlight-dim: var(--highlight);
 
+  --white: var(--text);
+
   --brighter-filter: 110%;
   font-size: 14px;
 }
@@ -103,6 +105,8 @@
     --downlight-dim: var(--border-secondary);
 
     --brighter-filter: 102%;
+
+    --white: var(--bg);
 
     font-size: 14px;
   }

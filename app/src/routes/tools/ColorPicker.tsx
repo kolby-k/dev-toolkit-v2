@@ -27,10 +27,16 @@ function ColorPicker() {
         style={{
           textAlign: "center",
           padding: "1rem",
+          display: "block",
+          width: "100%",
         }}
       >
         Color Picker
       </h4>
+      <p style={{ textAlign: "center", padding: "0.5rem", minWidth: "100px" }}>
+        Explore colors across multiple color spaces and match them using
+        different combinations.
+      </p>
       <div className={styles.grid}>
         <div className={styles.trow}>
           <div className={styles.trow1}>

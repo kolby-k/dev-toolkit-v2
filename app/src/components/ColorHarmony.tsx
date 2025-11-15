@@ -29,6 +29,9 @@ const COLOR_COMBO_OPTIONS: ColorCombinationTypes[] = [
 function ColorHarmony({ colorList, setColorList }: ColorHarmonyProps) {
   const [colorCombo, setColorCombo] =
     useState<ColorCombinationTypes>("complementary");
+  const [showColorCodeHoverOnly, setShowColorCodeHoverOnly] =
+    useState<boolean>(false);
+
   const currentPrimaryData = colorList.find((c) => c.label === "Primary");
   const currentPrimaryColor = currentPrimaryData?.color;
 
@@ -72,6 +75,15 @@ function ColorHarmony({ colorList, setColorList }: ColorHarmonyProps) {
             </option>
           ))}
         </select>
+        <label className={styles.colorCodeCheckboxLabel}>
+          Always show color details
+        </label>
+        <input
+          type="checkbox"
+          checked={!showColorCodeHoverOnly}
+          onChange={() => setShowColorCodeHoverOnly(!showColorCodeHoverOnly)}
+          style={{ display: "inline", height: "1rem", width: "auto" }}
+        />
       </div>
 
       <div className={styles.colorPalleteCardWrapper}>
@@ -81,9 +93,11 @@ function ColorHarmony({ colorList, setColorList }: ColorHarmonyProps) {
               key={`pallete-card-${idx}`}
               color={c.color}
               label={c.label}
+              showTextOnHover={showColorCodeHoverOnly}
             />
           ))}
       </div>
+      <p className="note-label">Tip: click a color to copy it</p>
     </div>
   );
 }

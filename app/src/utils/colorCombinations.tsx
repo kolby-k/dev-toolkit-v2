@@ -1,6 +1,6 @@
 import type { ColorSpaceType } from "../components/ColorPickerSelector";
 import type { ColorPickerData } from "../routes/tools/ColorPicker";
-import { clamp255 } from "./clamp";
+import { clamp100p, clamp255 } from "./clamp";
 import { p } from "./formatters";
 
 export type ColorSpaceData = {
@@ -96,18 +96,18 @@ export function getMonochromaticColor(
     secondary = { color: `hsl(${h} ${s}% ${l}%)`, label: "Secondary" };
   }
 
-  // adjust oklch lightness by 10%; chroma by 0.05; hue reamins constant
+  // adjust oklch lightness by 10%; chroma and hue reamins constant
   if (colorSpace === "oklch") {
     const [l, c, h] = values.map((v, idx) => {
       const currentVal = v;
       let newVal = currentVal;
       // adjust lightness; main variable to change in monochormatic
       if (idx === 0) {
-        newVal = currentVal > 0.5 ? currentVal - 0.1 : currentVal + 0.1;
+        newVal = currentVal >= 0.15 ? clamp100p(currentVal - 0.15) : 0.2;
       }
-      // adjust chroma gently; avoid extreme saturations
+      // adjust chroma; no required for monochromatic
       if (idx === 1) {
-        newVal = currentVal > 0.25 ? currentVal - 0.05 : currentVal + 0.05;
+        newVal = currentVal;
       }
       // adjust hue; not required for monochoromatic
       if (idx === 2) {

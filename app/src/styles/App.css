@@ -260,6 +260,20 @@
   bottom: 10px;
 }
 
+/* OTHER */
+
+input[type="checkbox"] {
+  accent-color: var(--primary-light);
+}
+
+.note-label {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-muted);
+  font-weight: 300;
+  opacity: 0.9;
+}
+
 /* MEDIA QUERIES */
 @media (min-width: 960px) {
   .footer {

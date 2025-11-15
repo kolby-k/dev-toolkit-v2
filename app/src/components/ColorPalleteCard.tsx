@@ -1,41 +1,36 @@
+import styles from "../styles/ColorPicker.module.css";
+
 export interface ColorPalleteCardProps {
   color: string;
   label: string;
+  showTextOnHover?: boolean;
 }
 
-function ColorPalleteCard({ color, label }: ColorPalleteCardProps) {
+function ColorPalleteCard({
+  color,
+  label,
+  showTextOnHover = true,
+}: ColorPalleteCardProps) {
+  const handleCopyColor = () => {
+    navigator.clipboard.writeText(color);
+  };
+
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
         background: color,
-        padding: "1rem",
-        border: "1px solid black",
-        borderRadius: "8px",
-        width: "250px",
-        height: "150px",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 10,
       }}
+      className={styles.colorPalleteCard}
+      onClick={handleCopyColor}
     >
-      <p
-        style={{
-          fontSize: "1.05rem",
-          fontWeight: 600,
-        }}
+      <span
+        className={`${styles.colorPalleteCardText} ${
+          showTextOnHover ? styles.colorPalleteCardTextHidden : ""
+        }`}
       >
-        {color}
-      </p>
-      <p
-        style={{
-          fontSize: "1.2rem",
-          fontWeight: 500,
-        }}
-      >
-        {label}
-      </p>
+        <p>{color}</p>
+        <p>{label}</p>
+      </span>
     </div>
   );
 }
