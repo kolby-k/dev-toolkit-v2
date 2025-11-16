@@ -4,7 +4,6 @@ import { oklchToRgb, rgbToHsl, rgbToOklch } from "../utils/colorConversions";
 
 export type ColorSpaceType = "rgb" | "hsl" | "oklch";
 export interface ColorPickerSelectorProps {
-  color: string;
   setColor: (color: string) => void;
   width?: number;
   height?: number;
@@ -35,12 +34,10 @@ function formatColorSpace(
 // ---------- Component ----------
 
 function ColorPickerSelector({
-  color,
   setColor,
   width = 300,
-  height = 200,
+  height = 300,
   oklchC = 0.1,
-  showSample = false,
 }: ColorPickerSelectorProps) {
   const [colorSpace, setColorSpace] = useState<ColorSpaceType>("rgb");
 
@@ -183,35 +180,6 @@ function ColorPickerSelector({
           borderRadius: 8,
         }}
       />
-      {showSample && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            fontSize: "1.25rem",
-            fontWeight: 500,
-            margin: "1rem",
-            gap: "0.5rem",
-          }}
-        >
-          <span
-            style={{
-              display: "inline-block",
-              width: 80,
-              height: 24,
-              background: color,
-              border: "1px solid #ccc",
-            }}
-            title={color}
-          />
-          <p>
-            <code>{color}</code>
-          </p>
-        </div>
-      )}
     </div>
   );
 }

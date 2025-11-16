@@ -1,8 +1,9 @@
 import type { ColorSpaceType } from "../components/ColorPickerSelector";
 import type { ColorPickerData } from "../routes/tools/ColorPicker";
-import { clamp100p, clamp255, clamp360 } from "./clamp";
+import { clamp100, clamp100p, clamp255 } from "./clamp";
 import { hslToRgb, rgbToHsl } from "./colorConversions";
 import { p } from "./formatters";
+import { wrap360 } from "./wrap";
 
 export type ColorSpaceData = {
   colorSpace: ColorSpaceType;
@@ -74,49 +75,17 @@ export function getMonochromaticColor(
   // example input: hsl(260 57% 43%)
   // example output: ["51","215","212"]
   if (colorSpace === "hsl") {
-    const [h, s, l] = values.map((v, idx) => {
-      let newVal;
-      // adjust hue
-      if (idx === 0) {
-        newVal = v;
-        //newVal = currentVal >= 180 ? currentVal - 60 : currentVal + 60;
-      }
+    const [h, s, l] = values;
+    const newL = p(clamp100(l * 0.7), 0);
 
-      // adjust saturation
-      if (idx === 1) {
-        newVal = v;
-      }
-
-      // adjust lightness
-      if (idx === 2) {
-        newVal = p(Math.min(100, Math.max(0, v * 0.7)), 0);
-      }
-      return newVal;
-    });
-
-    secondary = { color: `hsl(${h} ${s}% ${l}%)`, label: "Secondary" };
+    secondary = { color: `hsl(${h} ${s}% ${newL}%)`, label: "Secondary" };
   }
 
   // adjust oklch lightness by 10%; chroma and hue reamins constant
   if (colorSpace === "oklch") {
-    const [l, c, h] = values.map((v, idx) => {
-      const currentVal = v;
-      let newVal = currentVal;
-      // adjust lightness; main variable to change in monochormatic
-      if (idx === 0) {
-        newVal = currentVal >= 0.15 ? clamp100p(currentVal - 0.15) : 0.2;
-      }
-      // adjust chroma; no required for monochromatic
-      if (idx === 1) {
-        newVal = currentVal;
-      }
-      // adjust hue; not required for monochoromatic
-      if (idx === 2) {
-        newVal = currentVal;
-      }
-      return p(newVal, 2);
-    });
-    secondary = { color: `oklch(${l} ${c} ${h})`, label: "Secondary" };
+    const [l, c, h] = values;
+    const newL = l >= 0.15 ? clamp100p(l - 0.15) : 0.2;
+    secondary = { color: `oklch(${p(newL, 2)} ${c} ${h})`, label: "Secondary" };
   }
 
   return [secondary as ColorPickerData];
@@ -137,8 +106,8 @@ export function getAnalogousColors(
     const [h, s, l] = rgbToHsl(r, g, b);
 
     const scaleValue = 20;
-    const hPlus = (h + scaleValue + 360) % 360;
-    const hMinus = (h - scaleValue + 360) % 360;
+    const hPlus = wrap360(h + scaleValue);
+    const hMinus = wrap360(h - scaleValue);
 
     const [tr, tg, tb] = hslToRgb(hPlus, s, l);
     const [sr, sg, sb] = hslToRgb(hMinus, s, l);
@@ -157,41 +126,31 @@ export function getAnalogousColors(
   // adjust hue, keep s and l similiar
   if (colorSpace === "hsl") {
     const scaleValue = 20;
-    const [th, ts, tl] = values.map((v, idx) => {
-      const newVal = idx === 0 ? v + scaleValue : v;
-      return Math.round(clamp360(newVal));
-    });
-    const [sh, ss, sl] = values.map((v, idx) => {
-      const newVal = idx === 0 ? v - scaleValue : v;
-      return Math.round(clamp360(newVal));
-    });
+    const [h, s, l] = values;
+    const th = wrap360(h + scaleValue);
+    const sh = wrap360(h - scaleValue);
+
     tint = {
-      color: `hsl(${th} ${ts}% ${tl}%)`,
+      color: `hsl(${th} ${s}% ${l}%)`,
       label: "Secondary",
     } as ColorPickerData;
     shade = {
-      color: `hsl(${sh} ${ss}% ${sl}%)`,
+      color: `hsl(${sh} ${s}% ${l}%)`,
       label: "Tertiary",
     } as ColorPickerData;
   }
 
   if (colorSpace === "oklch") {
     const scaleValue = 30;
-
-    const [tl, tc, th] = values.map((v, idx) => {
-      const newVal = idx === 2 ? p(clamp360(v + scaleValue), 2) : v;
-      return newVal;
-    });
-    const [sl, sc, sh] = values.map((v, idx) => {
-      const newVal = idx === 2 ? p(clamp360(v - scaleValue), 2) : v;
-      return newVal;
-    });
+    const [l, c, h] = values;
+    const th = p(wrap360(h + scaleValue), 2);
+    const sh = p(wrap360(h - scaleValue), 2);
     tint = {
-      color: `oklch(${tl} ${tc} ${th})`,
+      color: `oklch(${l} ${c} ${th})`,
       label: "Secondary",
     } as ColorPickerData;
     shade = {
-      color: `oklch(${sl} ${sc} ${sh})`,
+      color: `oklch(${l} ${c} ${sh})`,
       label: "Tertiary",
     } as ColorPickerData;
   }
@@ -199,4 +158,286 @@ export function getAnalogousColors(
   if (!tint || !shade) return null;
 
   return [tint, shade];
+}
+
+// return a 1 color that is on the opposite side of the color wheel.
+export function getComplementaryColors(
+  primaryColor: string
+): ColorPickerData[] | null {
+  const { colorSpace, values } = getColorSpaceType(primaryColor);
+
+  let opposite; // complementary color
+
+  // convert to HSL for shifting hue
+  if (colorSpace === "rgb") {
+    const [h, s, l] = rgbToHsl(...values);
+
+    const scaleValue = 180;
+    const hPlus = wrap360(h + scaleValue);
+
+    const [r, g, b] = hslToRgb(hPlus, s, l);
+
+    opposite = {
+      color: `rgb(${r},${g},${b})`,
+      label: "Secondary",
+    } as ColorPickerData;
+  }
+
+  // adjust hue by 180 degrees
+  if (colorSpace === "hsl") {
+    const scaleValue = 180;
+    const [h, s, l] = values;
+    const newHue = wrap360(h + scaleValue);
+
+    opposite = {
+      color: `hsl(${newHue} ${s}% ${l}%)`,
+      label: "Secondary",
+    } as ColorPickerData;
+  }
+
+  if (colorSpace === "oklch") {
+    const scaleValue = 180;
+    const [l, c, h] = values;
+    const newHue = p(wrap360(h + scaleValue), 2);
+
+    opposite = {
+      color: `oklch(${l} ${c} ${newHue})`,
+      label: "Secondary",
+    } as ColorPickerData;
+  }
+
+  if (!opposite) return null;
+
+  return [opposite];
+}
+
+// return a set of 2 colors that are adjecent to the primary color.
+export function getTriadColors(primaryColor: string): ColorPickerData[] | null {
+  const { colorSpace, values } = getColorSpaceType(primaryColor);
+
+  let secondary;
+  let tertiary;
+
+  // convert to HSL for shifting hue
+  if (colorSpace === "rgb") {
+    const [h, s, l] = rgbToHsl(...values);
+
+    const scaleValue = 120;
+    const hPlus = wrap360(h + scaleValue);
+    const hLow = wrap360(h - scaleValue);
+    const [r1, g1, b1] = hslToRgb(hPlus, s, l);
+    const [r2, g2, b2] = hslToRgb(hLow, s, l);
+
+    secondary = {
+      color: `rgb(${r1},${g1},${b1})`,
+      label: "Secondary",
+    } as ColorPickerData;
+    tertiary = {
+      color: `rgb(${r2},${g2},${b2})`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  // adjust hue by 180 degrees
+  if (colorSpace === "hsl") {
+    const scaleValue = 120;
+    const [h, s, l] = values;
+    const h1 = wrap360(h + scaleValue);
+    const h2 = wrap360(h - scaleValue);
+
+    secondary = {
+      color: `hsl(${h1} ${s}% ${l}%)`,
+      label: "Secondary",
+    } as ColorPickerData;
+    tertiary = {
+      color: `hsl(${h2} ${s}% ${l}%)`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  if (colorSpace === "oklch") {
+    const scaleValue = 120;
+    const [l, c, h] = values;
+    const h1 = p(wrap360(h + scaleValue), 2);
+    const h2 = p(wrap360(h - scaleValue), 2);
+
+    secondary = {
+      color: `oklch(${l} ${c} ${h1})`,
+      label: "Secondary",
+    } as ColorPickerData;
+    tertiary = {
+      color: `oklch(${l} ${c} ${h2})`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  if (!secondary || !tertiary) return null;
+
+  return [secondary, tertiary];
+}
+
+// return 2 colors that are on the opposite side of the color wheel, but slightly shifted from true complementary.
+export function getSplitComplementaryColors(
+  primaryColor: string
+): ColorPickerData[] | null {
+  const { colorSpace, values } = getColorSpaceType(primaryColor);
+
+  let secondary;
+  let tertiary;
+
+  // convert to HSL for shifting hue
+  if (colorSpace === "rgb") {
+    const [h, s, l] = rgbToHsl(...values);
+
+    const scaleValue1 = 150;
+    const scaleValue2 = 210;
+    const h1 = wrap360(h + scaleValue1);
+    const h2 = wrap360(h + scaleValue2);
+
+    const [r1, g1, b1] = hslToRgb(h1, s, l);
+    const [r2, g2, b2] = hslToRgb(h2, s, l);
+
+    secondary = {
+      color: `rgb(${r1},${g1},${b1})`,
+      label: "Secondary",
+    } as ColorPickerData;
+
+    tertiary = {
+      color: `rgb(${r2},${g2},${b2})`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  // adjust hue by 180 degrees
+  if (colorSpace === "hsl") {
+    const scaleValue1 = 150;
+    const scaleValue2 = 210;
+    const [h, s, l] = values;
+    const h1 = wrap360(h + scaleValue1);
+    const h2 = wrap360(h + scaleValue2);
+
+    secondary = {
+      color: `hsl(${h1} ${s}% ${l}%)`,
+      label: "Secondary",
+    } as ColorPickerData;
+
+    tertiary = {
+      color: `hsl(${h2} ${s}% ${l}%)`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  if (colorSpace === "oklch") {
+    const scaleValue1 = 150;
+    const scaleValue2 = 210;
+    const [l, c, h] = values;
+    const h1 = p(wrap360(h + scaleValue1), 2);
+    const h2 = p(wrap360(h + scaleValue2), 2);
+
+    secondary = {
+      color: `oklch(${l} ${c} ${h1})`,
+      label: "Secondary",
+    } as ColorPickerData;
+
+    tertiary = {
+      color: `oklch(${l} ${c} ${h2})`,
+      label: "Tertiary",
+    } as ColorPickerData;
+  }
+
+  if (!secondary || !tertiary) return null;
+
+  return [secondary, tertiary];
+}
+
+// return 3 colors that form two complementary pairs on the color wheel, based on primary color.
+export function getTetradicColors(
+  primaryColor: string
+): ColorPickerData[] | null {
+  const { colorSpace, values } = getColorSpaceType(primaryColor);
+
+  let secondary;
+  let tertiary;
+  let quaternary;
+
+  // convert to HSL for shifting hue
+  if (colorSpace === "rgb") {
+    const [h, s, l] = rgbToHsl(...values);
+
+    const scaleValue = 90;
+    const h1 = wrap360(h + scaleValue);
+    const h2 = wrap360(h + scaleValue * 2);
+    const h3 = wrap360(h + scaleValue * 3);
+
+    const [r1, g1, b1] = hslToRgb(h1, s, l);
+    const [r2, g2, b2] = hslToRgb(h2, s, l);
+    const [r3, g3, b3] = hslToRgb(h3, s, l);
+
+    secondary = {
+      color: `rgb(${r1},${g1},${b1})`,
+      label: "Secondary",
+    } as ColorPickerData;
+
+    tertiary = {
+      color: `rgb(${r2},${g2},${b2})`,
+      label: "Tertiary",
+    } as ColorPickerData;
+    quaternary = {
+      color: `rgb(${r3},${g3},${b3})`,
+      label: "Quaternary",
+    } as ColorPickerData;
+  }
+
+  // adjust hue by 180 degrees
+  if (colorSpace === "hsl") {
+    const scaleValue = 90;
+
+    const [h, s, l] = values;
+    const h1 = wrap360(h + scaleValue);
+    const h2 = wrap360(h + scaleValue * 2);
+    const h3 = wrap360(h + scaleValue * 3);
+
+    secondary = {
+      color: `hsl(${h1} ${s}% ${l}%)`,
+      label: "Secondary",
+    } as ColorPickerData;
+
+    tertiary = {
+      color: `hsl(${h2} ${s}% ${l}%)`,
+      label: "Tertiary",
+    } as ColorPickerData;
+
+    quaternary = {
+      color: `hsl(${h3} ${s}% ${l}%)`,
+      label: "Quaternary",
+    } as ColorPickerData;
+  }
+
+  if (colorSpace === "oklch") {
+    const scaleValue = 90;
+
+    const [l, c, h] = values;
+    const h1 = p(wrap360(h + scaleValue), 2);
+    const h2 = p(wrap360(h + scaleValue * 2), 2);
+    const h3 = p(wrap360(h + scaleValue * 3), 2);
+
+    secondary = {
+      color: `oklch(${l} ${c} ${h1})`,
+      label: "Secondary",
+    } as ColorPickerData;
+
+    tertiary = {
+      color: `oklch(${l} ${c} ${h2})`,
+      label: "Tertiary",
+    } as ColorPickerData;
+
+    quaternary = {
+      color: `oklch(${l} ${c} ${h3})`,
+      label: "Quaternary",
+    } as ColorPickerData;
+  }
+
+  if (!secondary || !tertiary || !quaternary) return null;
+
+  return [secondary, tertiary, quaternary];
 }

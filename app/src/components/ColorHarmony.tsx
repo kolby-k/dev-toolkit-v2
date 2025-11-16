@@ -4,7 +4,11 @@ import type { ColorPickerData } from "../routes/tools/ColorPicker";
 import styles from "../styles/ColorPicker.module.css";
 import {
   getAnalogousColors,
+  getComplementaryColors,
   getMonochromaticColor,
+  getSplitComplementaryColors,
+  getTetradicColors,
+  getTriadColors,
 } from "../utils/colorCombinations";
 
 export interface ColorHarmonyProps {
@@ -113,19 +117,15 @@ function deriveColorCombinations(
 ) {
   const colorList: ColorPickerData[] = [];
 
-  let secondary;
-  let tertiary;
-  let quaternary;
-
   // 1 secondary color, opposite of primary, creating strong contrast.
   if (colorCombination === "complementary") {
-    secondary = { color: "rgba(52, 27, 153, 1)", label: "Secondary" };
-    colorList.push(secondary);
+    const newSecondary = getComplementaryColors(primaryColor);
+    if (newSecondary) colorList.push(...newSecondary);
   }
 
   if (colorCombination === "split-complementary") {
-    secondary = { color: "oklch(0.7039 0.1 245.1896)", label: "Secondary" };
-    colorList.push(secondary);
+    const newColors = getSplitComplementaryColors(primaryColor);
+    if (newColors) colorList.push(...newColors);
   }
 
   // A set of colors that are different hues, but close together on the color wheel
@@ -141,19 +141,13 @@ function deriveColorCombinations(
   }
 
   if (colorCombination === "triad") {
-    secondary = { color: "rgba(177, 26, 26, 1)", label: "Secondary" };
-    tertiary = { color: "rgba(76, 104, 159, 1)", label: "Tertiary" };
-    colorList.push(secondary);
-    colorList.push(tertiary);
+    const newColors = getTriadColors(primaryColor);
+    if (newColors) colorList.push(...newColors);
   }
 
   if (colorCombination === "tetradic") {
-    secondary = { color: "rgba(177, 26, 26, 1)", label: "Secondary" };
-    tertiary = { color: "rgba(76, 104, 159, 1)", label: "Tertiary" };
-    quaternary = { color: "rgba(105, 159, 76, 1)", label: "Quaternary" };
-    colorList.push(secondary);
-    colorList.push(tertiary);
-    colorList.push(quaternary);
+    const newColors = getTetradicColors(primaryColor);
+    if (newColors) colorList.push(...newColors);
   }
 
   return colorList;

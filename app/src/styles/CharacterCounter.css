@@ -12,8 +12,7 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 1rem auto;
-
-  max-width: 80%;
+  max-width: min(90vw, 1250px);
 }
 
 #character-count-stats span {

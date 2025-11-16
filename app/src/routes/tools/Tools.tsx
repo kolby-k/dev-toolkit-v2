@@ -91,7 +91,7 @@ function Tools() {
         <div className="tool-list">
           {filteredTools &&
             filteredTools.map((t, idx) => {
-              return <ToolCard tool={t} key={`tool-${idx}`} />;
+              return <ToolCard tool={t} key={`${t.label}-${idx}`} />;
             })}
         </div>
       </div>

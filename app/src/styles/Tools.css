@@ -164,6 +164,7 @@
 
   gap: 1rem;
   padding: 0.5rem;
+  margin-bottom: 1rem;
 
   min-height: 70dvh;
 
@@ -188,4 +189,8 @@
 
 #tool-wrapper-small label {
   font-size: 1.1rem;
+}
+
+.extra-bottom-padding {
+  padding-bottom: 2rem !important;
 }

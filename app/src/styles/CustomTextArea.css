@@ -1,52 +1,46 @@
 #text-area-custom {
-  border: 1px solid red;
-
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-
-  max-width: min(90vw, 1250px);
-  min-height: 350px;
-  margin: auto;
-
   border: 1px solid var(--border);
   border-radius: 10px;
-
   background-color: var(--bg-secondary);
 
-  /* box-shadow: inset 0 0 4px 20px red; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  max-width: min(90vw, 1250px);
+  margin: auto;
+
+  min-height: 350px;
 }
 
 #tac {
   font-family: inherit;
   font-size: 1.15rem;
-  line-height: 1.3;
-  font-weight: 400;
+  font-weight: 300;
 
   color: var(--text-secondary);
   background-color: inherit;
 
-  height: 100%;
   width: 100%;
-  display: inline-block;
+  flex: 1;
+
+  display: block;
 
   resize: none;
   outline: none;
   border: none;
   border-radius: inherit;
 
+  overflow: hidden;
+
   padding: 0.5rem;
   box-shadow: inherit;
 }
 
-/* #tac:focus {
-  border-color: var(--primary);
-} */
-
 #tac-gutter {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 
   padding: 0.5rem 0;
   font-family: monospace;
