@@ -18,22 +18,14 @@ function ColorPicker() {
     if (newColor === currentPrimary?.color) return;
 
     const newData = [{ color: newColor, label: "Primary" }];
+
     setData(newData);
   };
 
   return (
     <div className={styles.page}>
-      <h4
-        style={{
-          textAlign: "center",
-          padding: "1rem",
-          display: "block",
-          width: "100%",
-        }}
-      >
-        Color Picker
-      </h4>
-      <p style={{ textAlign: "center", padding: "0.5rem", minWidth: "100px" }}>
+      <h4 className={styles.title}>Color Picker</h4>
+      <p className={styles.description}>
         Explore colors across multiple color spaces and match them using
         different combinations.
       </p>
