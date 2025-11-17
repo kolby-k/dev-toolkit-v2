@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router";
 import "./styles/App.css";
 
 import Home from "./routes/Home";
-import NotFound from "./routes/Not-Found";
+import NotFound from "./routes/NotFound";
 import Tools from "./routes/tools/Tools";
 
 import JsonFormatter from "./routes/tools/JsonFormatter";
