@@ -1,6 +1,6 @@
 import type React from "react";
 import { Link } from "react-router";
-import resetScrollOnRedirect from "../utils/resetWindowScroll";
+import resetScrollOnRedirect from "../../lib/resetWindowScroll";
 
 export type ButtonVariantTypes =
   | "primary"

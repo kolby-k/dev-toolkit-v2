@@ -2,11 +2,11 @@ import { useSearchParams } from "react-router";
 import { IoMdClose } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
 
-import useSearchFilter from "../../hooks/useSearchFilter";
-import CustomButton from "../../components/CustomButton";
+import useSearchFilter from "../shared/hooks/useSearchFilter";
+import CustomButton from "../shared/components/ui/CustomButton";
+import ToolCard from "../shared/components/ui/ToolCard";
 
-import "../../styles/Tools.css";
-import ToolCard from "../../components/ToolCard";
+import "../shared/styles/Tools.css";
 
 function Tools() {
   const {

@@ -1,12 +1,13 @@
 import { useState } from "react";
-import CustomButton from "../../components/CustomButton";
-import "../../styles/APIKeyGenerator.css";
 import {
   HiOutlineClipboardDocumentCheck,
   HiOutlineClipboardDocument,
 } from "react-icons/hi2";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import ExpandableDescription from "../../components/ExpandableDescription";
+
+import CustomButton from "../../../shared/components/ui/CustomButton";
+import ExpandableDescription from "../../../shared/components/ui/ExpandableDescription";
+import "../styles/APIKeyGenerator.css";
 
 const MAX_KEY_LENGTH = 99;
 const MIN_KEY_LENGTH = 12;

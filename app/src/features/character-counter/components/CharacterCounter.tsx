@@ -1,6 +1,7 @@
 import { useState } from "react";
-import "../../styles/CharacterCounter.css";
-import CustomTextArea from "../../components/CustomTextArea";
+
+import CustomTextArea from "../../../shared/components/ui/CustomTextArea";
+import "../styles/CharacterCounter.css";
 
 export type AggregateMethod = "sum" | "avg" | "max" | "min";
 

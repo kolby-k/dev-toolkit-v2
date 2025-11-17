@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+
 import NotFoundImage from "../assets/not-found.png";
 
 function NotFound() {

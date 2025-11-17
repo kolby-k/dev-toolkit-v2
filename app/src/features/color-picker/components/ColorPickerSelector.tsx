@@ -1,8 +1,8 @@
 import { useRef, useEffect, useState } from "react";
-import { p } from "../utils/formatters";
-import { oklchToRgb, rgbToHsl, rgbToOklch } from "../utils/colorConversions";
+import { oklchToRgb } from "../lib/colorConversions";
+import { COLOR_SPACE_OPTIONS, type ColorSpaceType } from "../config/constants";
+import { formatColorSpace } from "../lib/formatter";
 
-export type ColorSpaceType = "rgb" | "hsl" | "oklch";
 export interface ColorPickerSelectorProps {
   setColor: (color: string) => void;
   width?: number;
@@ -11,27 +11,6 @@ export interface ColorPickerSelectorProps {
   oklchC?: number; // 0..~0.37 typical gamut; default 0.1
   showSample?: boolean;
 }
-
-const COLOR_SPACE_OPTIONS: ColorSpaceType[] = ["rgb", "hsl", "oklch"];
-// ---------- Utilities ----------
-
-// Formatter
-function formatColorSpace(
-  colorSpace: ColorSpaceType,
-  r: number,
-  g: number,
-  b: number
-): string {
-  if (colorSpace === "rgb") return `rgb(${r}, ${g}, ${b})`;
-  if (colorSpace === "hsl") {
-    const [h, s, l] = rgbToHsl(r, g, b);
-    return `hsl(${h} ${s}% ${l}%)`;
-  }
-  // oklch
-  const [L, C, h] = rgbToOklch(r, g, b);
-  return `oklch(${p(L, 2)} ${p(C, 2)} ${p(h, 2)})`;
-}
-// ---------- Component ----------
 
 function ColorPickerSelector({
   setColor,

@@ -1,9 +1,8 @@
 import { useState } from "react";
-import ColorHarmony from "../../components/ColorHarmony";
-import ColorPickerSelector from "../../components/ColorPickerSelector";
-import styles from "../../styles/ColorPicker.module.css";
-
-export type ColorPickerData = { color: string; label: string };
+import ColorHarmony from "./ColorHarmony";
+import ColorPickerSelector from "./ColorPickerSelector";
+import styles from "../styles/ColorPicker.module.css";
+import type { ColorPickerData } from "../index";
 
 function ColorPicker() {
   const [data, setData] = useState<ColorPickerData[]>([]);

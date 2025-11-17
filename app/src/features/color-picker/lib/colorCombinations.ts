@@ -1,16 +1,10 @@
-import type { ColorSpaceType } from "../components/ColorPickerSelector";
-import type { ColorPickerData } from "../routes/tools/ColorPicker";
-import { clamp100, clamp100p, clamp255 } from "./clamp";
+import { clamp100, clamp100p, clamp255 } from "../../../shared/lib/clamp";
 import { hslToRgb, rgbToHsl } from "./colorConversions";
-import { p } from "./formatters";
-import { wrap360 } from "./wrap";
+import { p } from "../../../shared/lib/formatters";
+import { wrap360 } from "../../../shared/lib/wrap";
 
-export type ColorSpaceData = {
-  colorSpace: ColorSpaceType;
-  values: [number, number, number]; // represent rgb | hsl | oklch
-  min: number;
-  max: number;
-};
+import type { ColorSpaceType } from "../config/constants";
+import type { ColorPickerData, ColorSpaceData } from "../index";
 
 /* UTILS */
 const getColorSpaceType = (primaryColor: string): ColorSpaceData => {

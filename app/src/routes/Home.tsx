@@ -1,8 +1,9 @@
-import "../styles/Home.css";
 import { MdCircle } from "react-icons/md";
-import CustomLinkButton from "../components/CustomLinkButton";
+import CustomLinkButton from "../shared/components/ui/CustomLinkButton";
 import { LiaSearchSolid } from "react-icons/lia";
 import { FaArrowDown, FaLongArrowAltRight } from "react-icons/fa";
+
+import "../shared/styles/Home.css";
 
 function Home() {
   // preserve whitespace exactly by using <pre> tags

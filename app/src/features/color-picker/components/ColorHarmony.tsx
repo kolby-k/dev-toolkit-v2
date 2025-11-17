@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ColorPalleteCard from "./ColorPalleteCard";
-import type { ColorPickerData } from "../routes/tools/ColorPicker";
 import styles from "../styles/ColorPicker.module.css";
 import {
   getAnalogousColors,
@@ -9,29 +8,18 @@ import {
   getSplitComplementaryColors,
   getTetradicColors,
   getTriadColors,
-} from "../utils/colorCombinations";
+} from "../lib/colorCombinations";
+
+import type { ColorPickerData } from "../index";
+import {
+  COLOR_COMBO_OPTIONS,
+  type ColorCombinationTypes,
+} from "../config/constants";
 
 export interface ColorHarmonyProps {
   colorList: ColorPickerData[];
   setColorList: (newColorList: ColorPickerData[]) => void;
 }
-
-export type ColorCombinationTypes =
-  | "complementary"
-  | "analogous"
-  | "monochromatic"
-  | "triad"
-  | "split-complementary"
-  | "tetradic";
-
-const COLOR_COMBO_OPTIONS: ColorCombinationTypes[] = [
-  "complementary",
-  "analogous",
-  "monochromatic",
-  "triad",
-  "split-complementary",
-  "tetradic",
-];
 
 function ColorHarmony({ colorList, setColorList }: ColorHarmonyProps) {
   const [colorCombo, setColorCombo] =

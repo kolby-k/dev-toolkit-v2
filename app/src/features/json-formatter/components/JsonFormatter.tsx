@@ -1,8 +1,9 @@
 import { useState } from "react";
-import "../../styles/JsonFormatter.css";
-import CustomButton from "../../components/CustomButton";
-import AlertDialog from "../../components/AlertDialog";
-import CustomTextArea from "../../components/CustomTextArea";
+import AlertDialog from "../../../shared/components/ui/AlertDialog";
+import CustomButton from "../../../shared/components/ui/CustomButton";
+import CustomTextArea from "../../../shared/components/ui/CustomTextArea";
+
+import "../styles/JsonFormatter.css";
 
 function JsonFormatter() {
   const [json, setJson] = useState<null | string>(null);

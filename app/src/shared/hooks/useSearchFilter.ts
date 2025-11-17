@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
-import { TOOLS, type ToolItem } from "../constants";
+import { TOOLS, type ToolItem } from "../../config/constants";
 
 function useSearchFilter() {
   const [userSearchInput, setUserSearchInput] = useState<string>("");
