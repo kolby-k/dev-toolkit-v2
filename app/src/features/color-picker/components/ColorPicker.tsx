@@ -1,35 +1,65 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ColorHarmony from "./ColorHarmony";
 import ColorPickerSelector from "./ColorPickerSelector";
 import styles from "../styles/ColorPicker.module.css";
 import type { ColorPickerData } from "../index";
+import ColorPickerDropdowns from "./ColorPickerDropdowns";
+import type {
+  ColorCombinationTypes,
+  ColorSpaceType,
+} from "../config/constants";
+import deriveColorCombinations from "../lib/colorCombinations";
+import { formatColorSpace } from "../lib/formatter";
+
+const INITAL_COLOR = "hsl(100 50% 50%)";
 
 function ColorPicker() {
-  const [data, setData] = useState<ColorPickerData[]>([]);
+  const [currentColorSpace, setCurrentColorSpace] =
+    useState<ColorSpaceType>("hsl");
+  const [currentColorCombo, setCurrentColorCombo] =
+    useState<ColorCombinationTypes>("complementary");
 
-  const handleNewPrimary = (newColor: string) => {
-    const currentPrimary = data.find((c) => c.label === "Primary");
-    if (newColor === currentPrimary?.color) return;
+  const [primary, setPrimary] = useState<ColorPickerData>({
+    color: INITAL_COLOR,
+    label: "Primary",
+  });
+  const [combinationColors, setCombinationColors] = useState<ColorPickerData[]>(
+    []
+  );
 
-    const newData = [{ color: newColor, label: "Primary" }];
-
-    setData(newData);
+  const handleNewPrimary = (rgbValues: [number, number, number]) => {
+    const newColor = formatColorSpace(currentColorSpace, ...rgbValues);
+    if (newColor === primary?.color) return;
+    setPrimary({ color: newColor, label: "Primary" });
+    // generate new color harmony data when primary changes
+    const newPallete = deriveColorCombinations(currentColorCombo, newColor);
+    setCombinationColors(newPallete);
   };
 
+  const getNewColorList = useCallback(() => {
+    return deriveColorCombinations(currentColorCombo, primary.color);
+  }, [primary.color, currentColorCombo]);
+
+  // generate new color harmony data when color combination changes
+  useEffect(() => {
+    const newPallete = getNewColorList();
+    setCombinationColors(newPallete);
+  }, [currentColorCombo, getNewColorList]);
+
   return (
-    <div className={styles.page}>
-      <h4 className={styles.title}>Color Picker</h4>
-      <p className={styles.description}>
-        Select a primary color, modify the color space, and easily visualize a
-        color pallete using different combinations.
-      </p>
-      <div className={styles.trow}>
-        <div className={styles.trow1}>
-          <ColorPickerSelector setColor={handleNewPrimary} />
-        </div>
-        <div className={styles.trow2}>
-          <ColorHarmony colorList={data} setColorList={setData} />
-        </div>
+    <div className={styles.colorPickerWrapper}>
+      <ColorPickerDropdowns
+        colorSpace={currentColorSpace}
+        colorCombo={currentColorCombo}
+        setColorSpace={setCurrentColorSpace}
+        setColorCombo={setCurrentColorCombo}
+      />
+      <div className={styles.colorPickerContent}>
+        <ColorPickerSelector
+          colorSpace={currentColorSpace}
+          setColor={handleNewPrimary}
+        />
+        <ColorHarmony primaryColor={primary} colorList={combinationColors} />
       </div>
     </div>
   );

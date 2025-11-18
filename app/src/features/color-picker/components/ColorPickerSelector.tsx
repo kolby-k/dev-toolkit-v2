@@ -1,10 +1,13 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
+
 import { oklchToRgb } from "../lib/colorConversions";
-import { COLOR_SPACE_OPTIONS, type ColorSpaceType } from "../config/constants";
-import { formatColorSpace } from "../lib/formatter";
+import { type ColorSpaceType } from "../config/constants";
+
+import styles from "../styles/ColorPicker.module.css";
 
 export interface ColorPickerSelectorProps {
-  setColor: (color: string) => void;
+  colorSpace: ColorSpaceType;
+  setColor: (newColor: [number, number, number]) => void;
   width?: number;
   height?: number;
   // OKLCH controls (optional)
@@ -13,13 +16,12 @@ export interface ColorPickerSelectorProps {
 }
 
 function ColorPickerSelector({
+  colorSpace,
   setColor,
   width = 300,
   height = 300,
   oklchC = 0.1,
 }: ColorPickerSelectorProps) {
-  const [colorSpace, setColorSpace] = useState<ColorSpaceType>("rgb");
-
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // draw per color space
@@ -102,63 +104,12 @@ function ColorPickerSelector({
     const [r, g, b, a] = ctx.getImageData(x, y, 1, 1).data;
 
     if (a === 0) return;
-    setColor(formatColorSpace(colorSpace, r, g, b));
+    setColor([r, g, b]);
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        alignItems: "center",
-        paddingBottom: "2rem",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          fontSize: "1.25rem",
-          fontWeight: 500,
-          margin: "1rem",
-        }}
-      >
-        Color Space
-        <select
-          id="color-space-choice"
-          style={{
-            width: 200,
-            backgroundColor: "var(--bg-muted)",
-            color: "var(--text)",
-            padding: "6px",
-            border: "1px solid var(--border)",
-            borderRadius: 4,
-            fontSize: "1.05rem",
-            margin: 4,
-          }}
-          value={colorSpace ?? ""}
-          onChange={(e) => setColorSpace(e.target.value as ColorSpaceType)}
-        >
-          {COLOR_SPACE_OPTIONS.map((c) => (
-            <option key={`option-${c}`} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
-      </div>
-      <canvas
-        ref={canvasRef}
-        onClick={handleClick}
-        style={{
-          border: "1px solid #333",
-          cursor: "crosshair",
-          borderRadius: 8,
-        }}
-      />
+    <div className={styles.canvasWrapper}>
+      <canvas ref={canvasRef} onClick={handleClick} className={styles.canvas} />
     </div>
   );
 }

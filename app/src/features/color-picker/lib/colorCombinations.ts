@@ -3,7 +3,10 @@ import { hslToRgb, rgbToHsl } from "./colorConversions";
 import { p } from "../../../shared/lib/formatters";
 import { wrap360 } from "../../../shared/lib/wrap";
 
-import type { ColorSpaceType } from "../config/constants";
+import type {
+  ColorCombinationTypes,
+  ColorSpaceType,
+} from "../config/constants";
 import type { ColorPickerData, ColorSpaceData } from "../index";
 
 /* UTILS */
@@ -434,4 +437,46 @@ export function getTetradicColors(
   if (!secondary || !tertiary || !quaternary) return null;
 
   return [secondary, tertiary, quaternary];
+}
+
+export default function deriveColorCombinations(
+  colorCombination: ColorCombinationTypes,
+  primaryColor: string
+) {
+  const colorList: ColorPickerData[] = [];
+
+  // 1 secondary color, opposite of primary, creating strong contrast.
+  if (colorCombination === "complementary") {
+    const newSecondary = getComplementaryColors(primaryColor);
+    if (newSecondary) colorList.push(...newSecondary);
+  }
+
+  if (colorCombination === "split-complementary") {
+    const newColors = getSplitComplementaryColors(primaryColor);
+    if (newColors) colorList.push(...newColors);
+  }
+
+  // A set of colors that are different hues, but close together on the color wheel
+  if (colorCombination === "analogous") {
+    const newColors = getAnalogousColors(primaryColor);
+    if (newColors) colorList.push(...newColors);
+  }
+
+  // One hue, with changes only in lightness and chroma/saturation.
+  if (colorCombination === "monochromatic") {
+    const newSecondary = getMonochromaticColor(primaryColor);
+    if (newSecondary) colorList.push(...newSecondary);
+  }
+
+  if (colorCombination === "triad") {
+    const newColors = getTriadColors(primaryColor);
+    if (newColors) colorList.push(...newColors);
+  }
+
+  if (colorCombination === "tetradic") {
+    const newColors = getTetradicColors(primaryColor);
+    if (newColors) colorList.push(...newColors);
+  }
+
+  return colorList;
 }
