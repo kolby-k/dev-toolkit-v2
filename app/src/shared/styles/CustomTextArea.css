@@ -57,3 +57,64 @@
   padding: 0 0.5rem;
   font-size: 0.9rem;
 }
+
+/* V2 Styles */
+#custom-text-area-wrapper {
+  display: flex;
+
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--bg-secondary);
+}
+
+#custom-text-area {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 0.35rem;
+
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+
+  resize: none;
+  outline: none;
+  border: none;
+  overflow: hidden;
+
+  flex: 1;
+  height: auto;
+  width: auto;
+}
+
+#custom-text-area-gutter {
+  display: flex;
+  flex-direction: column;
+
+  flex: 0 0 2.5rem; /* grow:0, shrink:0, basis:2.5rem */
+  max-width: 2.5rem;
+  height: fit-content;
+
+  align-items: flex-end; /* right-align numbers */
+  justify-content: flex-start;
+
+  padding: 0.35rem 0.5rem;
+  background-color: var(--bg-muted);
+  border-right: 1px solid var(--border);
+  user-select: none;
+  overflow: hidden;
+}
+
+.gutter-row-item {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--text-muted);
+
+  /* Ensure one “row” per text line */
+  height: 1.5em;
+}

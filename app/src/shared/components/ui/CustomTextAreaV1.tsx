@@ -10,7 +10,7 @@ const MIN_ROWS = 30;
 const BUFFER = 3;
 const LINE_HEIGHT_SCALE = 1.5;
 
-function CustomTextArea({ text = "", setText }: CustomTextAreaProps) {
+function CustomTextAreaV1({ text = "", setText }: CustomTextAreaProps) {
   const [numRows, setNumRows] = useState<number>(MIN_ROWS);
   const [lineHeight, setLineHeight] = useState<number>(16);
 
@@ -82,4 +82,4 @@ function CustomTextArea({ text = "", setText }: CustomTextAreaProps) {
   );
 }
 
-export default CustomTextArea;
+export default CustomTextAreaV1;

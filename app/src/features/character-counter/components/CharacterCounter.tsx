@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import CustomTextArea from "../../../shared/components/ui/CustomTextArea";
+import CustomTextAreaV1 from "../../../shared/components/ui/CustomTextAreaV1";
 import "../styles/CharacterCounter.css";
 
 export type AggregateMethod = "sum" | "avg" | "max" | "min";
@@ -33,7 +33,7 @@ function CharacterCounter() {
             );
           })}
         </div>
-        <CustomTextArea text={text} setText={setText} />
+        <CustomTextAreaV1 text={text} setText={setText} />
       </section>
     </div>
   );

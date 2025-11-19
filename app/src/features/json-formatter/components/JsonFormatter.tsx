@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AlertDialog from "../../../shared/components/ui/AlertDialog";
 import CustomButton from "../../../shared/components/ui/CustomButton";
-import CustomTextArea from "../../../shared/components/ui/CustomTextArea";
+import CustomTextAreaV1 from "../../../shared/components/ui/CustomTextAreaV1";
 
 import "../styles/JsonFormatter.css";
 
@@ -93,7 +93,7 @@ function JsonFormatter() {
           </div>
         )}
         <div>
-          <CustomTextArea text={json ? json : ""} setText={setJson} />
+          <CustomTextAreaV1 text={json ? json : ""} setText={setJson} />
         </div>
       </div>
     </div>
