@@ -1,12 +1,12 @@
 import { useState } from "react";
 import AlertDialog from "../../../shared/components/ui/AlertDialog";
 import CustomButton from "../../../shared/components/ui/CustomButton";
-import CustomTextAreaV1 from "../../../shared/components/ui/CustomTextAreaV1";
 
 import "../styles/JsonFormatter.css";
+import CustomTextArea from "../../../shared/components/textArea/CustomTextArea";
 
 function JsonFormatter() {
-  const [json, setJson] = useState<null | string>(null);
+  const [json, setJson] = useState<string>("");
 
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -43,6 +43,7 @@ function JsonFormatter() {
   };
 
   const verifySampleInput = () => {
+    // display confirmation alert before inserting json if current input is different json
     if (json && json.length > 0 && sample !== json) {
       return setVisible(true);
     } else {
@@ -51,52 +52,51 @@ function JsonFormatter() {
   };
 
   const setSampleJson = () => {
+    setSuccess(null);
+    setError(null);
     setJson(sample);
   };
 
   return (
-    <div id="tool-full-page">
-      <div className="header-container">
-        <h3 id="tool-page-title">JSON Formatter</h3>
-        <div className="json-formatter-button-container">
-          <span>
-            <CustomButton title="Format" onClick={formatJson} />
-            <CustomButton title="Validate" onClick={validateJson} />
-            <CustomButton
-              title="Copy"
-              onClick={copyJson}
-              animateClick
-              loadingDurationMS={200}
-            />
-          </span>
-          <span>
-            <CustomButton
-              title="Sample JSON"
-              onClick={verifySampleInput}
-              variant="secondary"
-              fontSize={1}
-            />
-            <AlertDialog
-              title="Insert Sample JSON"
-              description="Do you want to replace the current input with sample JSON data?"
-              onUserAction={setSampleJson}
-              onUserActionLabel="Confirm"
-              visible={visible}
-              onClose={() => setVisible(false)}
-            />
-          </span>
-        </div>
-        {(error || success) && (
-          <div className="banner">
-            {success && <p className="success-text">{success}</p>}
-            {error && <p className="error-text">{error}</p>}
-          </div>
-        )}
-        <div>
-          <CustomTextAreaV1 text={json ? json : ""} setText={setJson} />
-        </div>
+    <section>
+      <div className="json-formatter-button-container">
+        <span>
+          <CustomButton title="Format" onClick={formatJson} />
+          <CustomButton title="Validate" onClick={validateJson} />
+          <CustomButton
+            title="Copy"
+            onClick={copyJson}
+            animateClick
+            loadingDurationMS={200}
+          />
+        </span>
+        <span>
+          <CustomButton
+            title="Sample JSON"
+            onClick={verifySampleInput}
+            variant="secondary"
+            fontSize={1}
+          />
+          <AlertDialog
+            title="Insert Sample JSON"
+            description="Do you want to replace the current input with sample JSON data?"
+            onUserAction={setSampleJson}
+            onUserActionLabel="Confirm"
+            visible={visible}
+            onClose={() => setVisible(false)}
+          />
+        </span>
       </div>
-    </div>
+      {(error || success) && (
+        <div className="banner">
+          {success && <p className="success-text">{success}</p>}
+          {error && <p className="error-text">{error}</p>}
+        </div>
+      )}
+      <div>
+        <CustomTextArea text={json} setText={setJson} />
+      </div>
+    </section>
   );
 }
 

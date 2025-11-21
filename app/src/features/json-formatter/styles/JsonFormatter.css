@@ -118,3 +118,7 @@
   flex-wrap: wrap;
   margin: 0.5rem 1rem;
 }
+
+.banner {
+  margin: 1rem auto;
+}
