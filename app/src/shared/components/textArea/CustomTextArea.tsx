@@ -1,9 +1,18 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 
+export interface CustomTextAreaProps {
+  text: string;
+  setText: (newText: string) => void;
+  placeholderText?: string;
+}
+
 const MIN_ROWS = 20;
 
-function CustomTextArea() {
-  const [text, setText] = useState<string>("");
+function CustomTextArea({
+  text,
+  setText,
+  placeholderText = "",
+}: CustomTextAreaProps) {
   const [gutter, setGutter] = useState<number[] | null>(null);
 
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -57,6 +66,7 @@ function CustomTextArea() {
         id="custom-text-area"
         value={text}
         onChange={handleTextChange}
+        placeholder={placeholderText}
       />
     </div>
   );

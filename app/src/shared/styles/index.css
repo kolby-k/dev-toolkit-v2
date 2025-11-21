@@ -210,9 +210,16 @@ textarea::placeholder {
   cursor: pointer;
   text-decoration: none;
 }
-
 .link-text:hover {
   filter: brightness(80%);
+}
+
+.fancy-label {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+.muted-text {
+  color: var(--text-muted);
 }
 
 .blur {

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "../../styles/CustomTextArea.css";
 
-export interface CustomTextAreaProps {
+export interface CustomTextAreaV1Props {
   text: string;
   setText: (newText: string) => void;
 }
@@ -10,7 +10,7 @@ const MIN_ROWS = 30;
 const BUFFER = 3;
 const LINE_HEIGHT_SCALE = 1.5;
 
-function CustomTextAreaV1({ text = "", setText }: CustomTextAreaProps) {
+function CustomTextAreaV1({ text = "", setText }: CustomTextAreaV1Props) {
   const [numRows, setNumRows] = useState<number>(MIN_ROWS);
   const [lineHeight, setLineHeight] = useState<number>(16);
 
