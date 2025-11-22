@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
+import "../../styles/CustomTextArea.css";
 
 export interface CustomTextAreaProps {
   text: string;

@@ -1,3 +1,4 @@
+import ToolHeader from "../../shared/components/ui/ToolHeader";
 import CharacterCounter from "./components/CharacterCounter";
 
 export type AggregateMethod = "sum" | "avg" | "max" | "min";
@@ -25,11 +26,10 @@ export const STATS: StatItem[] = [
 function index() {
   return (
     <div id="character-counter-page">
-      <h3 id="tool-page-title">Character Counter</h3>
-      <p>
-        Type something below to see the total number of words, character{" "}
-        <span className="fancy-label">(including whitespace)</span>, and more!
-      </p>
+      <ToolHeader
+        title="Character Counter"
+        description="Type below to see the total number of words, characters and more"
+      />
       <CharacterCounter />
     </div>
   );

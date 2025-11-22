@@ -15,6 +15,13 @@
   flex: 1;
 }
 
+.gradient-card {
+  background: linear-gradient(0deg, var(--bg) 50%, var(--bg-secondary));
+  border: 1px solid var(--border);
+  border-top: 1px solid var(--downlight-dim);
+  border-radius: 10px;
+}
+
 /* HEADER */
 .header {
   display: grid;
@@ -227,17 +234,21 @@
 }
 
 /* EXPANDABLE DESCRIPTION COMPONENT */
+.edw-shared {
+  position: relative;
+
+  max-width: 1250px;
+  margin: auto;
+}
 .expanded-description-wrapper {
   height: 100%;
   overflow: auto;
-  position: relative;
   padding-bottom: 2rem;
 }
 
 .collapsed-description-wrapper {
   max-height: 30svh;
   overflow: hidden;
-  position: relative;
 }
 
 .collapsed-description {
@@ -258,6 +269,30 @@
 
 .collapsed-description-icon {
   bottom: 10px;
+}
+
+/* TOOL PAGE (header) */
+#tool-header-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1500px;
+  margin: auto;
+  padding: 0.25rem 1rem;
+}
+
+#tool-header-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+#tool-header-description {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  padding: 0.5rem;
 }
 
 /* OTHER */

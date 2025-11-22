@@ -11,6 +11,32 @@ export interface ToolItem {
 
 export const TOOLS: ToolItem[] = [
   {
+    label: "API Key Generator",
+    description:
+      "Create a random and secure API Key of various lengths and encoding types.",
+    href: "/tools/api-key-generator",
+    category: ["security"],
+    isFrontend: true,
+    isBackend: true,
+  },
+
+  {
+    label: "Character Counter",
+    description: "Count characters, words, and lines in text.",
+    href: "/tools/character-counter",
+    category: ["utility"],
+    isFrontend: true,
+    isBackend: false,
+  },
+  {
+    label: "Color Picker",
+    description: "Easily compare colors and copy them as CSS snippets.",
+    href: "/tools/color-picker",
+    category: ["design"],
+    isFrontend: true,
+    isBackend: false,
+  },
+  {
     label: "JSON Formatter",
     description: "Quickly turn your JSON into a clean and readable format.",
     href: "/tools/json-formatter",
@@ -19,12 +45,12 @@ export const TOOLS: ToolItem[] = [
     isBackend: false,
   },
   {
-    label: "Character Counter",
-    description: "Count characters, words, and lines in text.",
-    href: "/tools/character-counter",
+    label: "Epoch Timestamp Converter",
+    description: "Convert UNIX Epoch timestamps into human readable dates.",
+    href: "/tools/epoch-timestamp-converter",
     category: ["utility"],
     isFrontend: true,
-    isBackend: false,
+    isBackend: true,
   },
   {
     label: "Text Compare",
@@ -50,30 +76,5 @@ export const TOOLS: ToolItem[] = [
     category: ["security"],
     isFrontend: true,
     isBackend: false,
-  },
-  {
-    label: "Color Picker",
-    description: "Easily compare colors and copy them as CSS snippets.",
-    href: "/tools/color-picker",
-    category: ["design"],
-    isFrontend: true,
-    isBackend: false,
-  },
-  {
-    label: "API Key Generator",
-    description:
-      "Create a random and secure API Key of various lengths and encoding types.",
-    href: "/tools/api-key-generator",
-    category: ["security"],
-    isFrontend: true,
-    isBackend: true,
-  },
-  {
-    label: "Epoch Timestamp Converter",
-    description: "Convert UNIX Epoch timestamps into human readable dates.",
-    href: "/tools/epoch-timestamp-converter",
-    category: ["utility"],
-    isFrontend: true,
-    isBackend: true,
   },
 ];

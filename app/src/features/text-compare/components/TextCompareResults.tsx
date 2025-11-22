@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CustomTextArea from "../../../shared/components/textArea/CustomTextArea";
+import CustomTextArea from "../../../shared/components/ui/CustomTextArea";
 
 function TextCompareResults() {
   const [textA, setTextA] = useState<string>("");

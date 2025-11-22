@@ -6,7 +6,7 @@ function ExpandableDescription({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className={`${
+      className={`edw-shared ${
         expanded
           ? "expanded-description-wrapper"
           : "collapsed-description-wrapper"

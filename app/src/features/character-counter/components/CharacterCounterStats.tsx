@@ -21,6 +21,8 @@ function CharacterCounterStats({ text }: CharacterCounterStatsProps) {
     }
   }, [debouncedText]);
 
+  if (!stats || stats.length === 0) return null;
+
   return (
     <div id="character-count-stats">
       {stats &&

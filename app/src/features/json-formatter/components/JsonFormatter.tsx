@@ -3,7 +3,7 @@ import AlertDialog from "../../../shared/components/ui/AlertDialog";
 import CustomButton from "../../../shared/components/ui/CustomButton";
 
 import "../styles/JsonFormatter.css";
-import CustomTextArea from "../../../shared/components/textArea/CustomTextArea";
+import CustomTextArea from "../../../shared/components/ui/CustomTextArea";
 
 function JsonFormatter() {
   const [json, setJson] = useState<string>("");
@@ -58,7 +58,7 @@ function JsonFormatter() {
   };
 
   return (
-    <section>
+    <section className="json-formatter-tool-wrapper">
       <div className="json-formatter-button-container">
         <span>
           <CustomButton title="Format" onClick={formatJson} />
@@ -88,7 +88,7 @@ function JsonFormatter() {
         </span>
       </div>
       {(error || success) && (
-        <div className="banner">
+        <div className="json-validation-wrapper">
           {success && <p className="success-text">{success}</p>}
           {error && <p className="error-text">{error}</p>}
         </div>
@@ -111,9 +111,12 @@ const sample = `{
   }`;
 
 function formatJSONError(e: unknown) {
+  // swap 'JSON.parse' with 'Error' for better readability
   const msg =
     e instanceof Error
       ? e.message.replace("JSON.parse:", "Error: ")
       : "Unknown Error";
-  return msg;
+  // remove column reference from error string
+  const removeText = msg.match(/(column\s\d+\s)/g);
+  return Array.isArray(removeText) ? msg.replaceAll(removeText[0], "") : msg;
 }

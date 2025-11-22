@@ -1,3 +1,18 @@
+#api-key-generator-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+  padding: 0 1rem;
+
+  width: 100%;
+  min-width: 80vw;
+  max-width: 1500px;
+
+  margin: auto;
+}
+
 #api-key-result {
   display: flex;
   align-items: center;
@@ -6,7 +21,7 @@
 
   height: 60px;
   width: 100%;
-  max-width: min(1000px, 90vw);
+  max-width: min(700px, 90vw);
   padding: 0.6rem 0.9rem;
 
   background-color: var(--bg-secondary);
@@ -23,6 +38,29 @@
   scrollbar-width: thin; /* Firefox */
 }
 
+.api-key-strength-container {
+  padding: 5px;
+}
+.api-key-strength {
+  font-weight: 700;
+}
+
+.safe {
+  color: var(--okay-text);
+}
+
+.strong {
+  color: var(--strong-text);
+}
+
+.very-strong {
+  color: var(--very-strong-text);
+}
+
+.extremely-strong {
+  color: var(--extreme-text);
+}
+
 #api-key-result.active {
   border: 1px solid var(--accent-green);
   box-shadow: 0 1px 8px var(--primary-light);
@@ -34,6 +72,7 @@
 }
 
 #api-key-result p {
+  text-align: left;
   font-size: 1.1rem;
   line-height: 2.5;
   margin: 0;
@@ -89,10 +128,10 @@
   gap: 2rem;
 
   position: relative;
-  border-radius: 10px;
   margin-bottom: 1rem;
 
   width: 100%;
+  padding: 0.5rem;
 }
 .number-input {
   width: 60px;
@@ -137,18 +176,19 @@
   justify-content: center;
 
   gap: 1rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
   margin-top: 1rem;
 
   color: var(--text-secondary);
 }
 
 .description-container p {
-  width: 70%;
+  width: 100%;
   min-width: 300px;
   text-align: left;
 
   font-size: 1.2rem;
+  max-width: min(1000px, 90vw);
 }
 
 @media (min-width: 1250px) {

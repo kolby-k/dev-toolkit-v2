@@ -54,6 +54,11 @@
 
   --white: var(--text);
 
+  --okay-text: oklch(83.405% 0.0386 237.234);
+  --strong-text: oklch(82.142% 0.07171 238.001);
+  --very-strong-text: oklch(0.77 0.1 220);
+  --extreme-text: oklch(0.74 0.1 145);
+
   --brighter-filter: 110%;
   font-size: 14px;
 }
@@ -105,6 +110,11 @@
     --downlight-dim: var(--border-secondary);
 
     --brighter-filter: 102%;
+
+    --okay-text: oklch(40% 0.075 235);
+    --strong-text: oklch(45% 0.12 240);
+    --very-strong-text: oklch(50% 0.18 235);
+    --extreme-text: oklch(55% 0.2 145);
 
     --white: var(--bg);
 
@@ -271,13 +281,6 @@ input {
 input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 8px var(--primary-light);
-}
-
-.gradient-card {
-  background: linear-gradient(0deg, var(--bg) 50%, var(--bg-secondary));
-  border: 1px solid var(--border);
-  border-top: 1px solid var(--downlight);
-  border-radius: 10px;
 }
 
 /* GLOBAL CLASSES */

@@ -58,7 +58,7 @@ function Home() {
         </div>
       </div>
       <div id="action-section">
-        <h4>Find the right tool:</h4>
+        <h4>Browse by Section:</h4>
         <span id="action-card-container">
           <div className="action-section-card">
             <h5>Frontend Tools</h5>

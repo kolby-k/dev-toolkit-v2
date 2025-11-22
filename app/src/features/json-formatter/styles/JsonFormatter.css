@@ -1,40 +1,13 @@
 #tool-full-page {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-
-  min-height: 50dvh;
-  height: 100%;
-  width: 100%;
-
-  padding: 1rem;
-  padding-bottom: 2rem;
-  margin: auto;
-
-  position: relative;
-  /* border: 1px solid red; */
+  margin: 1rem auto;
 }
 
-.header-container {
+.json-formatter-tool-wrapper {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+
   gap: 1rem;
-
-  width: 100%;
-  padding: 1rem;
-
-  position: relative;
-
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom: 0;
-
-  text-align: center;
-}
-
-#tool-page-title {
-  font-weight: 500;
-  padding: 0.5rem;
 }
 
 .json-formatter-button-container {
@@ -43,7 +16,6 @@
 
   max-width: 1250px;
 
-  padding: 1rem;
   gap: 1rem;
 
   width: 100%;
@@ -119,6 +91,8 @@
   margin: 0.5rem 1rem;
 }
 
-.banner {
+.json-validation-wrapper {
   margin: 1rem auto;
+  text-align: center;
+  height: 30px;
 }

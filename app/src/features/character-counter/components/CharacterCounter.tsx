@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import CharacterCounterStats from "./CharacterCounterStats";
-import CustomTextArea from "../../../shared/components/textArea/CustomTextArea";
+import CustomTextArea from "../../../shared/components/ui/CustomTextArea";
 import "../styles/CharacterCounter.css";
 
 function CharacterCounter() {

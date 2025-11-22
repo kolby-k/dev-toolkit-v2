@@ -17,7 +17,7 @@ export function getCharacterCounterStats(
   }
 
   if (calculation === "sum") {
-    if (l === "characters") {
+    if (l === "characters w/ spaces") {
       const value = text.length;
       return {
         method: calculation,
@@ -26,14 +26,14 @@ export function getCharacterCounterStats(
         label,
       };
     } else if (l === "words") {
-      const value = text.match(/\w+/g)?.length || 0;
+      const value = text.match(/\S+/g)?.length || 0;
       return {
         method: calculation,
         value,
         valueString: value.toString(),
         label,
       };
-    } else if (l === "characters w/ spaces") {
+    } else if (l === "characters") {
       const value = text.match(/\S/g)?.length || 0;
       return {
         method: calculation,

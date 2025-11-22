@@ -1,3 +1,4 @@
+import ToolHeader from "../../shared/components/ui/ToolHeader";
 import ColorPicker from "./components/ColorPicker";
 import type { ColorSpaceType } from "./config/constants";
 import styles from "./styles/ColorPicker.module.css";
@@ -14,11 +15,11 @@ export type ColorSpaceData = {
 function index() {
   return (
     <div className={styles.page}>
-      <h4 className={styles.title}>Color Picker</h4>
-      <p className={styles.description}>
-        Select a primary color, modify the color space, and easily visualize a
-        color pallete using different combinations.
-      </p>
+      <ToolHeader
+        title="Color Picker"
+        description="Select a primary color, modify the color space, and easily visualize a
+        color pallete using different combinations."
+      />
       <ColorPicker />
     </div>
   );
