@@ -92,7 +92,6 @@
 }
 
 .json-validation-wrapper {
-  margin: 1rem auto;
+  padding-top: 0.5rem;
   text-align: center;
-  height: 30px;
 }

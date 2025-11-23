@@ -59,6 +59,8 @@
   --very-strong-text: oklch(0.77 0.1 220);
   --extreme-text: oklch(0.74 0.1 145);
 
+  --transparent-bg: oklch(0.15 0 271 / 0.5);
+
   --brighter-filter: 110%;
   font-size: 14px;
 }
@@ -115,6 +117,8 @@
     --strong-text: oklch(45% 0.12 240);
     --very-strong-text: oklch(50% 0.18 235);
     --extreme-text: oklch(55% 0.2 145);
+
+    --transparent-bg: oklch(0.95 0 0 / 0.5);
 
     --white: var(--bg);
 
@@ -266,6 +270,10 @@ textarea::placeholder {
 
 .green {
   color: var(--accent-green);
+}
+
+.bold {
+  font-weight: 600;
 }
 
 input {

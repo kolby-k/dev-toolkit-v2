@@ -19,11 +19,8 @@ function index() {
             marginTop: "1rem",
           }}
         />
-        <ExpandableDescription>
-          <div className="description-container">
-            <h4 style={{ textAlign: "center", width: "100%" }}>
-              What is an API Key?
-            </h4>
+        <ExpandableDescription title="What is an API Key?">
+          <>
             <p>
               An API key looks like a randomly generated string of characters.
               They are often used by web applications to authenticate and
@@ -52,7 +49,7 @@ function index() {
               keep it secret, and only generate it with a cryptographically
               secure source.
             </p>
-          </div>
+          </>
         </ExpandableDescription>
       </div>
     </div>

@@ -236,39 +236,96 @@
 /* EXPANDABLE DESCRIPTION COMPONENT */
 .edw-shared {
   position: relative;
-
   max-width: 1250px;
   margin: auto;
-}
-.expanded-description-wrapper {
-  height: 100%;
-  overflow: auto;
-  padding-bottom: 2rem;
+
+  padding: 1rem;
+  /* don't cap height here, it breaks expansion */
 }
 
-.collapsed-description-wrapper {
-  max-height: 30svh;
-  overflow: hidden;
+/* When expanded: allow scrolling if tall */
+.expanded-description {
+  max-height: max(300px, 40vh);
+  overflow-y: auto;
+  padding-bottom: 1rem;
+
+  scrollbar-color: var(--border) var(--bg-secondary);
 }
 
+/* Inner content gets the fade + clip in collapsed mode */
 .collapsed-description {
-  max-height: 40vh;
   overflow: hidden;
+  max-height: 30vh;
 }
+
+/* Shared chevron styles */
 .chevron-icon-shared {
-  cursor: pointer;
   font-size: 1.75rem;
   position: absolute;
   left: 50%;
+  bottom: 10px;
   transform: translate(-50%);
   color: var(--text);
-}
-.expanded-description-icon {
-  bottom: 0px;
+
+  border: none;
+  display: flex;
+  padding: 0.5rem;
 }
 
-.collapsed-description-icon {
-  bottom: 10px;
+.chevron-icon-shared::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background: var(--transparent-bg);
+  backdrop-filter: blur(5px);
+
+  border-radius: 50px;
+}
+
+.expanded-chevron-icon {
+  margin-bottom: -0.5rem;
+}
+.chevron-icon {
+  cursor: pointer;
+
+  width: 2rem;
+  height: auto;
+  box-sizing: content-box;
+
+  color: var(--icon);
+  background-color: var(--text-muted);
+  border-radius: 50px;
+}
+
+.edw-title {
+  text-align: center;
+}
+
+.edw-shared p {
+  display: block;
+  width: 90%;
+  min-width: 300px;
+  text-align: left;
+
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+
+  margin: 1rem auto;
+  max-width: min(1000px, 90vw);
+}
+
+@media (min-width: 1250px) {
+  .edw-shared p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .edw-shared p {
+    width: 75%;
+  }
 }
 
 /* TOOL PAGE (header) */

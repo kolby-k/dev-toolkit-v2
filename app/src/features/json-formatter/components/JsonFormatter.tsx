@@ -89,8 +89,8 @@ function JsonFormatter() {
       </div>
       {(error || success) && (
         <div className="json-validation-wrapper">
-          {success && <p className="success-text">{success}</p>}
-          {error && <p className="error-text">{error}</p>}
+          {success && <p className="success-text bold">{success}</p>}
+          {error && <p className="error-text bold">{error}</p>}
         </div>
       )}
       <div>
