@@ -398,3 +398,67 @@ input[type="checkbox"] {
     display: none;
   }
 }
+
+/* CUSTOM CHECKBOX */
+.custom-checkbox-wrapper {
+  display: flex;
+  justify-content: center;
+
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.custom-checkbox-label {
+  font-size: 1.1rem;
+}
+
+#custom-checkbox-input {
+  width: 1rem;
+  height: auto;
+
+  cursor: pointer;
+
+  accent-color: var(--accent-orange);
+}
+
+/* CUSTOM DATE TIME INPUT */
+.date-time-input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 0.25rem;
+  padding: 0.25rem;
+}
+.date-time-input-value-container {
+  display: flex;
+  align-items: center;
+
+  height: 60px;
+
+  padding: 0.25rem;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.date-time-input-label {
+  position: absolute;
+  top: 0px;
+  left: 8%;
+
+  background: linear-gradient(var(--bg) 50%, var(--bg-secondary) 50%);
+
+  font-size: 0.8rem;
+  font-weight: 300;
+
+  margin: 0.25rem;
+
+  color: var(--text-secondary);
+}
+.date-time-input-value {
+  width: 90px;
+  font-size: 1.1rem;
+
+  text-align: center;
+}

@@ -5,6 +5,7 @@ import JsonFormatter from "../features/json-formatter/index";
 import APIKeyGenerator from "../features/api-key-gen/index";
 import CharacterCounter from "../features/character-counter/index";
 import TextCompare from "../features/text-compare/index";
+import UnixTimestampConverter from "../features/unix-timestamp/index";
 
 export const toolRoutes = [
   { path: l("Color Picker"), element: <ColorPicker /> },
@@ -12,6 +13,7 @@ export const toolRoutes = [
   { path: l("API Key Generator"), element: <APIKeyGenerator /> },
   { path: l("Character Counter"), element: <CharacterCounter /> },
   { path: l("Text Compare"), element: <TextCompare /> },
+  { path: l("Unix Timestamp Converter"), element: <UnixTimestampConverter /> },
 ];
 
 // get the href of the tool from /config/constanst; fallback to label name.

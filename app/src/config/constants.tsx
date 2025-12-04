@@ -45,8 +45,8 @@ export const TOOLS: ToolItem[] = [
     isBackend: false,
   },
   {
-    label: "Epoch Timestamp Converter",
-    description: "Convert UNIX Epoch timestamps into human readable dates.",
+    label: "Unix Timestamp Converter",
+    description: "Convert Unix epoch timestamps into human readable dates.",
     href: "/tools/epoch-timestamp-converter",
     category: ["utility"],
     isFrontend: true,

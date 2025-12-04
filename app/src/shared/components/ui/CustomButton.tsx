@@ -22,7 +22,7 @@ export interface CustomButtonProps {
 function CustomButton({
   title,
   variant = "primary",
-  fontSize = 1.15,
+  fontSize = 1,
   style = {},
   onClick,
   children,
