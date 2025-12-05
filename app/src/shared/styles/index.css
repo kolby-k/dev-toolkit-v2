@@ -37,8 +37,8 @@
   --btn-red-light: oklch(0.85 0.2 28);
   --text-red: oklch(0.15 0.15 28);
 
-  --btn-gray: oklch(0.65 0 0);
-  --btn-gray-light: oklch(0.85 0 0);
+  --btn-gray: oklch(0.45 0 0);
+  --btn-gray-light: oklch(0.65 0 0);
   --text-gray: oklch(0.15 0 0);
 
   --link: oklch(0.5 0.2 210);
@@ -287,7 +287,7 @@ textarea::placeholder {
 input {
   background-color: var(--bg-secondary);
 
-  padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+  padding: 0.5rem;
   border-radius: 0.75rem;
   width: 100%;
   outline: none;

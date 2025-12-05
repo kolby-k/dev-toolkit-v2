@@ -147,16 +147,20 @@
 #number-input-wrapper button {
   height: 30px;
   width: 80px;
-  background: linear-gradient(var(--divider), var(--bg-muted));
+  background: var(--icon);
   border-radius: 4px;
 
   font-size: 1rem;
   line-height: 1;
-  color: var(--icon);
+  color: var(--white);
   border: 1px solid var(--border);
 
   cursor: pointer;
   box-shadow: 0 2px 8px var(--shadow);
+}
+
+#number-input-wrapper button:active {
+  background-color: var(--btn-gray);
 }
 
 #number-input-wrapper button:disabled {

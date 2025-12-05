@@ -62,7 +62,7 @@
 #custom-text-area-wrapper {
   display: flex;
 
-  max-height: 50vh;
+  max-height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
 

@@ -294,8 +294,8 @@
   height: auto;
   box-sizing: content-box;
 
-  color: var(--icon);
-  background-color: var(--text-muted);
+  stroke: var(--icon);
+  fill: var(--text-muted);
   border-radius: 50px;
 }
 
@@ -435,6 +435,7 @@ input[type="checkbox"] {
   align-items: center;
 
   height: 60px;
+  width: 100px;
 
   padding: 0.25rem;
 
@@ -444,20 +445,21 @@ input[type="checkbox"] {
 
 .date-time-input-label {
   position: absolute;
-  top: 0px;
-  left: 8%;
+  top: 0%;
+  left: 15%;
 
   background: linear-gradient(var(--bg) 50%, var(--bg-secondary) 50%);
 
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 300;
 
-  margin: 0.25rem;
+  line-height: 20px;
 
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 .date-time-input-value {
   width: 90px;
+  height: 40px;
   font-size: 1.1rem;
 
   text-align: center;
